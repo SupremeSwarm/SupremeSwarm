@@ -12,7 +12,7 @@
     html { scrollbar-width: none; scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
 
-    /* 🔥 FIX 1: Prevent scrolling on the main page when the cart is open */
+    /* FIX: Prevents scrolling on the main page when the cart is open */
     body.cart-open {
         overflow: hidden; 
     }
@@ -261,12 +261,12 @@
     <p class="copyright">© 2025 Supreme Swarm. All rights reserved.</p>
   </footer>
   <script>
-    const stripe = Stripe('pk_live_51SW1PwL0Ebf0PKOISvuIROhvkBzt6Lrzc3SbNHruBrpAzhKmULgOFvrhOF2QIictmuX1BlpeRNLW1y3ykfpNN3k600VXMKtd3a');
-    const PRICE_ID = 'price_1SW1uBL0Ebf0PKOIBpzMtGdW';
+    // ⚠️ IMPORTANT: REPLACE THIS WITH YOUR STRIPE TEST PUBLISHABLE KEY (pk_test_...)
+    const stripe = Stripe('pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxx'); 
+    
     let cart = [];
     setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 2500);
     
-    /* 🔥 FIX 2: Added scroll lock/unlock when toggling cart 🔥 */
     function toggleCart() {
       const overlay = document.getElementById('cartOverlay');
       const sidebar = document.getElementById('cartSidebar');
@@ -275,7 +275,7 @@
       overlay.classList.toggle('open');
       sidebar.classList.toggle('open');
       
-      // Toggle body scroll
+      // Fixes the scrolling issue
       if (isOpening) {
         document.body.classList.add('cart-open');
       } else {
@@ -338,15 +338,13 @@
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
+
+    // ⚠️ IMPORTANT: REPLACE THIS WITH YOUR STRIPE TEST PAYMENT LINK URL (e.g., https://buy.stripe.com/test_xxxxxxxx)
     function checkout() {
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      stripe.redirectToCheckout({
-        lineItems: [{ price: PRICE_ID, quantity: totalQty }],
-        mode: 'payment',
-        successUrl: window.location.origin + window.location.pathname + '?success=true',
-        cancelUrl: window.location.origin + window.location.pathname + '?canceled=true',
-      }).then(function(result) { if (result.error) { showToast('Error: ' + result.error.message); } });
+      const stripeLink = 'https://buy.stripe.com/test_xxxxxxxxxxxxxxxxxxxxxxxxxxxx'; 
+      window.location.href = stripeLink; 
     }
+    
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('success')) { setTimeout(() => { showToast('🎉 Payment successful! We will contact you soon.'); cart = []; updateCart(); }, 3000); window.history.replaceState({}, '', window.location.pathname); }
     if (urlParams.get('canceled')) { setTimeout(() => { showToast('Payment canceled. No charges made.'); }, 3000); window.history.replaceState({}, '', window.location.pathname); }
