@@ -9,10 +9,11 @@
   <!-- PADDLE SCRIPTS -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
-    // Remove the next line when you go live
+    // Remove the next line when you go live (to switch from test mode)
     Paddle.Environment.set('sandbox');
-    // Replace with your real client-side token when ready (find it in Paddle → Developers → Authentication)
-    Paddle.Setup({ token: "test_6b03ca3e9b6f8c3f3b8e3e3f3b8e3e3f" });
+    // IMPORTANT: Replace this with your REAL client-side token from Paddle dashboard
+    // Go to Paddle > Developers > Authentication > Copy the sandbox token (starts with 'test_')
+    Paddle.Setup({ token: "live_0922099adfffec9048e1841983b" });
   </script>
 
   <style>
@@ -89,7 +90,7 @@
     .card-btn { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,143,0,0.1)); border: 1px solid rgba(255,215,0,0.3); color: #FFD700; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; display: inline-block; text-decoration: none; cursor: pointer; }
     .card-btn:hover { background: linear-gradient(135deg, #FFD700, #FF8F00); color: #000; transform: scale(1.05); }
     
-    /* Rest of your original styles unchanged */
+    /* WHERE TO BUY */
     .stores-section { background: linear-gradient(180deg, rgba(255,215,0,0.02), transparent); }
     .stores { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
     .store { background: linear-gradient(145deg, #141414, #0a0a0a); border: 1px solid rgba(255,215,0,0.1); border-radius: 20px; padding: 40px 50px; text-align: center; transition: all 0.4s; min-width: 250px; text-decoration: none; display: block; }
@@ -97,18 +98,23 @@
     .store-icon { font-size: 40px; color: #FFD700; margin-bottom: 15px; display: block; }
     .store h3 { color: #fff; font-size: 20px; margin-bottom: 5px; }
     .store p { color: #555; font-size: 13px; }
+    
+    /* FEATURES */
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; }
     .feature { text-align: center; padding: 25px; border-radius: 16px; transition: all 0.3s; }
     .feature:hover { background: rgba(255,215,0,0.03); }
     .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,143,0,0.05)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; color: #FFD700; }
     .feature h3 { font-size: 16px; margin-bottom: 8px; }
     .feature p { color: #555; font-size: 13px; }
+    
+    /* FOOTER */
     footer { padding: 50px 5%; border-top: 1px solid rgba(255,215,0,0.1); text-align: center; position: relative; z-index: 2; }
     .footer-logo { font-size: 40px; margin-bottom: 20px; opacity: 0.5; }
     .socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
     .socials a { width: 45px; height: 45px; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFD700; font-size: 18px; transition: all 0.3s; text-decoration: none; }
     .socials a:hover { background: #FFD700; color: #000; transform: translateY(-5px); }
     .copyright { color: #444; font-size: 13px; }
+    
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hero h1 { font-size: 36px; }
@@ -123,7 +129,7 @@
     <div class="loader-hex">
       <svg viewBox="0 0 100 100"><polygon points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.3"/></svg>
     </div>
-    <div class="loader-bee">Bee</div>
+    <div class="loader-bee">🐝</div>
     <div class="loader-text">SUPREME SWARM</div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
   </div>
@@ -142,7 +148,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="logo"><span>Bee</span> SUPREME SWARM</div>
+    <div class="logo"><span>🐝</span> SUPREME SWARM</div>
     <ul class="nav-links">
       <li><a href="#products">Products</a></li>
       <li><a href="#stores">Where to Buy</a></li>
@@ -154,7 +160,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-icon">Bee</div>
+      <div class="hero-icon">🐝</div>
       <h1>SUPREME SWARM</h1>
       <p>Premium Bee Swarm Simulator Items & Accounts</p>
       <div class="hero-btns">
@@ -173,41 +179,34 @@
     <p class="section-sub">Top-tier Bee Swarm Simulator goods</p>
     <div class="gold-line"></div>
     <div class="products">
-
-      <!-- LIVE PADDLE BUTTON -->
       <div class="card">
-        <span class="card-icon">Bee</span>
+        <span class="card-icon">🐝</span>
         <h3>Mythic Bee Pack</h3>
         <p>5 Mythic Bees of your choice</p>
         <div class="card-price">$24.99</div>
         <a href="#" class="card-btn paddle_button" data-product="pro_01kakx02f4h4zg33x7v9qw9ekf" data-theme="dark">Buy Now</a>
       </div>
-
-      <!-- Other cards – just replace data-product when you create them -->
       <div class="card">
-        <span class="card-icon">Honey</span>
+        <span class="card-icon">🍯</span>
         <h3>Honey Bundle</h3>
         <p>100 Trillion Honey Instant</p>
         <div class="card-price">$14.99</div>
         <a href="#" class="card-btn">Add to Cart</a>
       </div>
-
       <div class="card">
-        <span class="card-icon">Star</span>
+        <span class="card-icon">⭐</span>
         <h3>Gifted Bee Bundle</h3>
         <p>10 Gifted Bees + Star Treats</p>
         <div class="card-price">$19.99</div>
         <a href="#" class="card-btn">Add to Cart</a>
       </div>
-
       <div class="card">
-        <span class="card-icon">Crown</span>
+        <span class="card-icon">👑</span>
         <h3>Stacked Account</h3>
         <p>Endgame account with all items</p>
         <div class="card-price">$149.99</div>
         <a href="#" class="card-btn">Add to Cart</a>
       </div>
-
     </div>
   </section>
 
@@ -230,7 +229,7 @@
       <a href="#" class="store">
         <span class="store-icon"><i class="fas fa-store"></i></span>
         <h3>Website Shop</h3>
-        <p>Now Live!</p>
+        <p>Coming soon</p>
       </a>
     </div>
   </section>
@@ -266,7 +265,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Bee</div>
+    <div class="footer-logo">🐝</div>
     <div class="socials">
       <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
