@@ -6,9 +6,9 @@
   <title>Supreme Swarm | Gaming Gear</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
-html { overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none; }
-html::-webkit-scrollbar { display: none; }
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; user-select: none; }
+    html { overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar { display: none; }
     :root {
       --gold: #FFD700;
       --gold-dark: #B8860B;
@@ -40,31 +40,23 @@ html::-webkit-scrollbar { display: none; }
       display: flex;
       align-items: center;
       gap: 10px;
-      font-weight: 900;
-      font-size: 1.4rem;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
     .logo svg { width: 40px; height: 40px; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--gold); }
+    .logo-text { height: 24px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; }
+    .nav-links svg { height: 16px; transition: opacity 0.3s; }
+    .nav-links a:hover svg { opacity: 0.7; }
     .btn {
       background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #000;
       padding: 0.7rem 1.5rem;
       border: none;
       border-radius: 5px;
-      font-weight: 700;
-      cursor: pointer;
       transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      align-items: center;
     }
+    .btn svg { height: 14px; }
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 30px rgba(255,215,0,0.3);
@@ -87,38 +79,17 @@ html::-webkit-scrollbar { display: none; }
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l21.65 12.5v25L30 55 8.35 42.5v-25L30 5z' fill='none' stroke='%23FFD700' stroke-opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
     }
-    .hero-content { position: relative; z-index: 1; }
+    .hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
     .hero-logo { width: 200px; height: 200px; margin-bottom: 2rem; animation: float 3s ease-in-out infinite; }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
     }
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      letter-spacing: 0.1em;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      color: #888;
-      margin-bottom: 2rem;
-      max-width: 600px;
-    }
+    .hero-title { height: 60px; margin-bottom: 2rem; }
     /* Products */
-    .section {
-      padding: 5rem 5%;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 3rem;
-      color: var(--gold);
-    }
+    .section { padding: 5rem 5%; }
+    .section-title { height: 40px; margin-bottom: 3rem; }
+    .section-header { display: flex; justify-content: center; }
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -133,34 +104,21 @@ html::-webkit-scrollbar { display: none; }
       padding: 2rem;
       text-align: center;
       transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .product-card:hover {
       transform: translateY(-10px);
       border-color: var(--gold);
       box-shadow: 0 20px 40px rgba(255,215,0,0.1);
     }
-    .product-icon {
-      font-size: 3rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .product-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .product-card p {
-      color: #777;
-      margin-bottom: 1rem;
-    }
-    .price {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
+    .product-icon { font-size: 3rem; color: var(--gold); margin-bottom: 1rem; }
+    .product-title { height: 22px; margin-bottom: 0.5rem; }
+    .product-desc { height: 16px; margin-bottom: 1rem; }
+    .product-price { height: 24px; }
     /* Features */
-    .features {
-      background: linear-gradient(180deg, transparent, rgba(255,215,0,0.02), transparent);
-    }
+    .features { background: linear-gradient(180deg, transparent, rgba(255,215,0,0.02), transparent); }
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -168,40 +126,51 @@ html::-webkit-scrollbar { display: none; }
       max-width: 1000px;
       margin: 0 auto;
     }
-    .feature {
-      text-align: center;
-      padding: 2rem;
+    .feature { text-align: center; padding: 2rem; display: flex; flex-direction: column; align-items: center; }
+    .feature i { font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+    .feature-title { height: 20px; margin-bottom: 0.5rem; }
+    .feature-desc { height: 16px; }
+    /* Contact */
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .feature i {
-      font-size: 2.5rem;
-      color: var(--gold);
-      margin-bottom: 1rem;
+    .contact-form input, .contact-form textarea {
+      background: #151515;
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
     }
-    .feature h3 { margin-bottom: 0.5rem; }
-    .feature p { color: #777; }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--gold);
+    }
+    .contact-form textarea { min-height: 150px; resize: vertical; }
+    .contact-form .btn { justify-content: center; width: 100%; padding: 1rem; }
     /* Footer */
     footer {
       text-align: center;
       padding: 3rem;
       border-top: 1px solid rgba(255,215,0,0.1);
-    }
-    .social-links {
       display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+      flex-direction: column;
+      align-items: center;
     }
-    .social-links a {
-      color: #777;
-      font-size: 1.5rem;
-      transition: color 0.3s;
-    }
+    .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .social-links a { color: #777; font-size: 1.5rem; transition: color 0.3s; }
     .social-links a:hover { color: var(--gold); }
-    footer p { color: #555; }
+    .copyright { height: 14px; }
     /* Mobile */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hero-logo { width: 150px; height: 150px; }
+      .hero-title { height: 40px; }
     }
   </style>
 </head>
@@ -221,14 +190,21 @@ html::-webkit-scrollbar { display: none; }
           <ellipse cx="28" cy="-10" rx="16" ry="10" fill="#FFD700" opacity="0.5" transform="rotate(20)"/>
         </g>
       </svg>
-      SUPREME SWARM
+      <svg class="logo-text" viewBox="0 0 200 30">
+        <defs>
+          <linearGradient id="textGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD700"/><stop offset="50%" stop-color="#FFC107"/><stop offset="100%" stop-color="#FF8F00"/>
+          </linearGradient>
+        </defs>
+        <text x="0" y="22" fill="url(#textGold)" font-family="Segoe UI, system-ui, sans-serif" font-weight="900" font-size="18">SUPREME SWARM</text>
+      </svg>
     </div>
     <ul class="nav-links">
-      <li><a href="#products">Products</a></li>
-      <li><a href="#features">Why Us</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#products"><svg viewBox="0 0 80 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI, system-ui, sans-serif" font-weight="500" font-size="14">Products</text></svg></a></li>
+      <li><a href="#features"><svg viewBox="0 0 70 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI, system-ui, sans-serif" font-weight="500" font-size="14">Why Us</text></svg></a></li>
+      <li><a href="#contact"><svg viewBox="0 0 70 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI, system-ui, sans-serif" font-weight="500" font-size="14">Contact</text></svg></a></li>
     </ul>
-    <button class="btn">Shop Now</button>
+    <button class="btn"><svg viewBox="0 0 80 18"><text x="0" y="14" fill="#000" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="14">Shop Now</text></svg></button>
   </nav>
 
   <section class="hero">
@@ -260,71 +236,99 @@ html::-webkit-scrollbar { display: none; }
           <ellipse cx="28" cy="-10" rx="18" ry="12" fill="#FFD700" opacity="0.4" transform="rotate(20, 28, -10)"/>
         </g>
       </svg>
-      <h1>SUPREME SWARM</h1>
-      <p>Elite gaming gear for champions. Level up your game with premium accessories and items.</p>
-      <button class="btn">Browse Collection</button>
+      <svg class="hero-title" viewBox="0 0 500 60">
+        <defs>
+          <linearGradient id="heroGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD700"/><stop offset="50%" stop-color="#FFC107"/><stop offset="100%" stop-color="#B8860B"/>
+          </linearGradient>
+        </defs>
+        <text x="250" y="45" text-anchor="middle" fill="url(#heroGold)" font-family="Segoe UI, system-ui, sans-serif" font-weight="900" font-size="48" letter-spacing="0.1em">SUPREME SWARM</text>
+      </svg>
+      <button class="btn"><svg viewBox="0 0 140 18"><text x="0" y="14" fill="#000" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="14">Browse Collection</text></svg></button>
     </div>
   </section>
 
   <section class="section" id="products">
-    <h2 class="section-title">Featured Products</h2>
+    <div class="section-header">
+      <svg class="section-title" viewBox="0 0 280 40">
+        <text x="140" y="30" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="800" font-size="32">Featured Products</text>
+      </svg>
+    </div>
     <div class="products">
       <div class="product-card">
         <div class="product-icon"><i class="fas fa-headset"></i></div>
-        <h3>Swarm Pro Headset</h3>
-        <p>7.1 surround sound with noise cancellation</p>
-        <div class="price">$129.99</div>
+        <svg class="product-title" viewBox="0 0 160 24"><text x="80" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="18">Swarm Pro Headset</text></svg>
+        <svg class="product-desc" viewBox="0 0 260 18"><text x="130" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">7.1 surround sound with noise cancellation</text></svg>
+        <svg class="product-price" viewBox="0 0 100 26"><text x="50" y="20" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="20">$129.99</text></svg>
       </div>
       <div class="product-card">
         <div class="product-icon"><i class="fas fa-keyboard"></i></div>
-        <h3>Hive Mech Keyboard</h3>
-        <p>RGB mechanical switches, hot-swappable</p>
-        <div class="price">$89.99</div>
+        <svg class="product-title" viewBox="0 0 180 24"><text x="90" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="18">Hive Mech Keyboard</text></svg>
+        <svg class="product-desc" viewBox="0 0 240 18"><text x="120" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">RGB mechanical switches, hot-swappable</text></svg>
+        <svg class="product-price" viewBox="0 0 100 26"><text x="50" y="20" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="20">$89.99</text></svg>
       </div>
       <div class="product-card">
         <div class="product-icon"><i class="fas fa-computer-mouse"></i></div>
-        <h3>Stinger Gaming Mouse</h3>
-        <p>20K DPI sensor, ultra-lightweight</p>
-        <div class="price">$69.99</div>
+        <svg class="product-title" viewBox="0 0 180 24"><text x="90" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="18">Stinger Gaming Mouse</text></svg>
+        <svg class="product-desc" viewBox="0 0 200 18"><text x="100" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">20K DPI sensor, ultra-lightweight</text></svg>
+        <svg class="product-price" viewBox="0 0 100 26"><text x="50" y="20" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="20">$69.99</text></svg>
       </div>
       <div class="product-card">
         <div class="product-icon"><i class="fas fa-gamepad"></i></div>
-        <h3>Colony Controller</h3>
-        <p>Pro-grade wireless controller</p>
-        <div class="price">$59.99</div>
+        <svg class="product-title" viewBox="0 0 160 24"><text x="80" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="18">Colony Controller</text></svg>
+        <svg class="product-desc" viewBox="0 0 200 18"><text x="100" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Pro-grade wireless controller</text></svg>
+        <svg class="product-price" viewBox="0 0 100 26"><text x="50" y="20" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="20">$59.99</text></svg>
       </div>
     </div>
   </section>
 
   <section class="section features" id="features">
-    <h2 class="section-title">Why Supreme Swarm?</h2>
+    <div class="section-header">
+      <svg class="section-title" viewBox="0 0 320 40">
+        <text x="160" y="30" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="800" font-size="32">Why Supreme Swarm?</text>
+      </svg>
+    </div>
     <div class="features-grid">
       <div class="feature">
         <i class="fas fa-bolt"></i>
-        <h3>Lightning Fast</h3>
-        <p>Ultra-low latency for competitive gaming</p>
+        <svg class="feature-title" viewBox="0 0 130 22"><text x="65" y="17" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="16">Lightning Fast</text></svg>
+        <svg class="feature-desc" viewBox="0 0 240 18"><text x="120" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Ultra-low latency for competitive gaming</text></svg>
       </div>
       <div class="feature">
         <i class="fas fa-shield-halved"></i>
-        <h3>Built to Last</h3>
-        <p>Premium materials, 2-year warranty</p>
+        <svg class="feature-title" viewBox="0 0 110 22"><text x="55" y="17" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="16">Built to Last</text></svg>
+        <svg class="feature-desc" viewBox="0 0 220 18"><text x="110" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">Premium materials, 2-year warranty</text></svg>
       </div>
       <div class="feature">
         <i class="fas fa-truck-fast"></i>
-        <h3>Free Shipping</h3>
-        <p>On all orders over $50</p>
+        <svg class="feature-title" viewBox="0 0 120 22"><text x="60" y="17" text-anchor="middle" fill="#fff" font-family="Segoe UI, system-ui, sans-serif" font-weight="600" font-size="16">Free Shipping</text></svg>
+        <svg class="feature-desc" viewBox="0 0 180 18"><text x="90" y="14" text-anchor="middle" fill="#777" font-family="Segoe UI, system-ui, sans-serif" font-size="13">On all orders over $50</text></svg>
       </div>
     </div>
   </section>
 
-  <footer id="contact">
+  <section class="section" id="contact">
+    <div class="section-header">
+      <svg class="section-title" viewBox="0 0 200 40">
+        <text x="100" y="30" text-anchor="middle" fill="#FFD700" font-family="Segoe UI, system-ui, sans-serif" font-weight="800" font-size="32">Contact Us</text>
+      </svg>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message"></textarea>
+      <button class="btn" type="submit"><svg viewBox="0 0 120 18"><text x="60" y="14" text-anchor="middle" fill="#000" font-family="Segoe UI, system-ui, sans-serif" font-weight="700" font-size="14">Send Message</text></svg></button>
+    </form>
+  </section>
+
+  <footer>
     <div class="social-links">
       <a href="#"><i class="fab fa-twitter"></i></a>
       <a href="#"><i class="fab fa-discord"></i></a>
       <a href="#"><i class="fab fa-instagram"></i></a>
       <a href="#"><i class="fab fa-youtube"></i></a>
     </div>
-    <p>&copy; 2025 Supreme Swarm. All rights reserved.</p>
+    <svg class="copyright" viewBox="0 0 280 16"><text x="140" y="12" text-anchor="middle" fill="#555" font-family="Segoe UI, system-ui, sans-serif" font-size="12">© 2025 Supreme Swarm. All rights reserved.</text></svg>
   </footer>
 </body>
 </html>
