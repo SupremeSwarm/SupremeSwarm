@@ -1,21 +1,16 @@
-<!DOCTYPE html>
+00897630<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Supreme Swarm | Bee Swarm Simulator</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <!-- PADDLE SCRIPTS -->
+  <!-- PADDLE SCRIPT -->
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
-    // Remove the next line when you go live (to switch from test mode)
-    Paddle.Environment.set('sandbox');
-    // IMPORTANT: Replace this with your REAL client-side token from Paddle dashboard
-    // Go to Paddle > Developers > Authentication > Copy the sandbox token (starts with 'test_')
-    Paddle.Setup({ token: "live_0922099adfffec9048e1841983b" });
+    // LIVE MODE (no sandbox line)
+    Paddle.Setup({ token: "live_0922099adfffec9048e1841983b" }); // Paste your live token from Paddle > Developers > Authentication
   </script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; user-select: none; }
     html::-webkit-scrollbar { display: none; }
@@ -87,7 +82,7 @@
     .card h3 { font-size: 20px; margin-bottom: 8px; }
     .card p { color: #666; font-size: 14px; margin-bottom: 15px; }
     .card-price { font-size: 26px; font-weight: 800; color: #FFD700; margin-bottom: 20px; }
-    .card-btn { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,143,0,0.1)); border: 1px solid rgba(255,215,0,0.3); color: #FFD700; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; display: inline-block; text-decoration: none; cursor: pointer; }
+    .card-btn { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,143,0,0.1)); border: 1px solid rgba(255,215,0,0.3); color: #FFD700; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; display: inline-block; text-decoration: none; }
     .card-btn:hover { background: linear-gradient(135deg, #FFD700, #FF8F00); color: #000; transform: scale(1.05); }
     
     /* WHERE TO BUY */
