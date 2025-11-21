@@ -3,164 +3,265 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supreme Swarm | Bee Swarm Simulator Items</title>
+  <title>Supreme Swarm | Bee Swarm Simulator</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;cursor:default;user-select:none}
-    html{overflow-y:scroll;scrollbar-width:none;-ms-overflow-style:none}
-    html::-webkit-scrollbar{display:none}
-    :root{--gold:#FFD700;--gold-dark:#B8860B;--honey:#FF8F00;--black:#0a0a0a}
-    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:#fff;overflow-x:hidden}
-    .loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;animation:fadeOut .5s ease 3s forwards}
-    .loader-bee{width:120px;height:120px;animation:loaderFloat 1s ease-in-out infinite,loaderZoom .5s ease 2.5s forwards}
-    .loader-hexagons{position:absolute;width:300px;height:300px;animation:hexRotate 3s linear infinite}
-    .loader-hex{position:absolute;width:100%;height:100%;animation:hexPulse 1.5s ease-in-out infinite}
-    .loader-hex:nth-child(2){animation-delay:.2s;transform:scale(.7);opacity:.6}
-    .loader-hex:nth-child(3){animation-delay:.4s;transform:scale(.4);opacity:.3}
-    .loader-text{margin-top:30px;height:30px;animation:textPulse 1s ease-in-out infinite}
-    .loader-bar-container{width:200px;height:4px;background:#222;border-radius:2px;margin-top:20px;overflow:hidden}
-    .loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--honey));border-radius:2px;animation:loadBar 2.5s ease forwards}
-    @keyframes loaderFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(5deg)}}
-    @keyframes loaderZoom{to{transform:scale(50);opacity:0}}
-    @keyframes hexRotate{to{transform:rotate(360deg)}}
-    @keyframes hexPulse{0%,100%{opacity:.3}50%{opacity:.8}}
-    @keyframes textPulse{0%,100%{opacity:.5}50%{opacity:1}}
-    @keyframes loadBar{0%{width:0}50%{width:70%}100%{width:100%}}
-    @keyframes fadeOut{to{opacity:0;visibility:hidden;pointer-events:none}}
-    .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
-    .particle{position:absolute;background:var(--gold);border-radius:50%;opacity:.3;animation:floatP linear infinite}
-    @keyframes floatP{0%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:.3}90%{opacity:.3}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
-    nav{position:fixed;top:0;width:100%;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,215,0,.15);transform:translateY(-100%);animation:slideDown .6s ease 3.2s forwards}
-    @keyframes slideDown{to{transform:translateY(0)}}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo svg{width:45px;height:45px}
-    .logo-text{height:26px}
-    .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
-    .nav-links a{text-decoration:none;display:block}
-    .nav-links svg{height:16px;transition:opacity .3s,filter .3s}
-    .nav-links a:hover svg{opacity:.8;filter:drop-shadow(0 0 8px rgba(255,215,0,.5))}
-    .btn{background:linear-gradient(135deg,var(--gold),var(--honey));padding:.8rem 1.8rem;border:none;border-radius:8px;transition:transform .3s,box-shadow .3s;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s}
-    .btn:hover::before{left:100%}
-    .btn svg{height:14px;position:relative;z-index:1}
-    .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 15px 40px rgba(255,215,0,.4)}
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;background:radial-gradient(ellipse at center,rgba(255,215,0,.08) 0%,transparent 60%)}
-    .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l21.65 12.5v25L30 55 8.35 42.5v-25L30 5z' fill='none' stroke='%23FFD700' stroke-opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;animation:bgPan 60s linear infinite}
-    @keyframes bgPan{to{background-position:1000px 1000px}}
-    .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;opacity:0;animation:fadeInUp 1s ease 3.3s forwards}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-    .hero-logo{width:220px;height:220px;margin-bottom:2rem;animation:heroFloat 4s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,215,0,.3))}
-    @keyframes heroFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-20px) rotate(2deg)}}
-    .hero-title{height:70px;margin-bottom:1rem}
-    .hero-subtitle{height:24px;margin-bottom:2.5rem;opacity:.7}
-    .hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-    .btn-outline{background:transparent;border:2px solid var(--gold);padding:.8rem 1.8rem;border-radius:8px;transition:all .3s;display:flex;align-items:center;justify-content:center}
-    .btn-outline:hover{background:rgba(255,215,0,.1);transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,215,0,.2)}
-    .btn-outline svg{height:14px}
-    .scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeInUp 1s ease 3.8s forwards}
-    .scroll-mouse{width:26px;height:40px;border:2px solid rgba(255,215,0,.5);border-radius:13px;position:relative}
-    .scroll-wheel{width:4px;height:8px;background:var(--gold);border-radius:2px;position:absolute;top:8px;left:50%;transform:translateX(-50%);animation:scrollWheel 1.5s ease-in-out infinite}
-    @keyframes scrollWheel{0%,100%{opacity:1;top:8px}50%{opacity:.3;top:20px}}
-    .scroll-arrows{display:flex;flex-direction:column;align-items:center}
-    .scroll-arrows span{display:block;width:10px;height:10px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:scrollArrow 1.5s ease-in-out infinite;opacity:.3}
-    .scroll-arrows span:nth-child(2){animation-delay:.2s}
-    .scroll-arrows span:nth-child(3){animation-delay:.4s}
-    @keyframes scrollArrow{0%,100%{opacity:.3}50%{opacity:1}}
-    .section{padding:6rem 5%;position:relative;z-index:2}
-    .section-header{display:flex;flex-direction:column;align-items:center;margin-bottom:4rem}
-    .section-title{height:45px;margin-bottom:1rem}
-    .section-line{width:80px;height:4px;background:linear-gradient(90deg,var(--gold),var(--honey));border-radius:2px;margin-top:1rem}
-    .products-section{background:linear-gradient(180deg,transparent,rgba(255,215,0,.03),transparent)}
-    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
-    .product-card{background:linear-gradient(145deg,#1a1a1a,#0d0d0d);border:1px solid rgba(255,215,0,.1);border-radius:20px;padding:2rem;text-align:center;transition:all .4s;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
-    .product-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,215,0,.1) 0%,transparent 60%);opacity:0;transition:opacity .4s}
-    .product-card:hover::before{opacity:1}
-    .product-card:hover{transform:translateY(-15px);border-color:var(--gold);box-shadow:0 30px 60px rgba(255,215,0,.15)}
-    .product-icon{width:90px;height:90px;background:linear-gradient(145deg,#222,#111);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2.5rem;border:2px solid rgba(255,215,0,.2);transition:all .4s}
-    .product-card:hover .product-icon{transform:scale(1.1) rotate(10deg);border-color:var(--gold);box-shadow:0 0 30px rgba(255,215,0,.3)}
-    .product-title{height:24px;margin-bottom:.5rem}
-    .product-desc{height:16px;margin-bottom:1rem;opacity:.6}
-    .product-price{height:28px;margin-bottom:1rem}
-    .stores-section{background:linear-gradient(180deg,rgba(255,215,0,.02),transparent)}
-    .stores{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;max-width:900px;margin:0 auto}
-    .store-card{background:linear-gradient(145deg,#1a1a1a,#0d0d0d);border:1px solid rgba(255,215,0,.1);border-radius:20px;padding:2.5rem 3rem;text-align:center;transition:all .4s;display:flex;flex-direction:column;align-items:center;min-width:220px}
-    .store-card:hover{transform:translateY(-10px);border-color:var(--gold);box-shadow:0 25px 50px rgba(255,215,0,.1)}
-    .store-icon{width:70px;height:70px;background:linear-gradient(145deg,#222,#111);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.8rem;color:var(--gold);border:2px solid rgba(255,215,0,.2);transition:all .4s}
-    .store-card:hover .store-icon{transform:rotate(-10deg) scale(1.1);border-color:var(--gold)}
-    .store-title{height:22px;margin-bottom:.5rem}
-    .store-desc{height:14px;opacity:.5}
-    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
-    .feature{text-align:center;padding:1.5rem;border-radius:16px;transition:all .3s;display:flex;flex-direction:column;align-items:center}
-    .feature:hover{background:rgba(255,215,0,.03)}
-    .feature-icon{width:50px;height:50px;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,143,0,.1));border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.3rem;color:var(--gold)}
-    .feature-title{height:18px;margin-bottom:.5rem}
-    .feature-desc{height:14px;opacity:.5}
-    footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(255,215,0,.1);display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
-    .footer-logo{width:50px;height:50px;margin-bottom:1rem;opacity:.5}
-    .social-links{display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem}
-    .social-links a{width:40px;height:40px;background:rgba(255,215,0,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;transition:all .3s;border:1px solid rgba(255,215,0,.2)}
-    .social-links a:hover{background:var(--gold);color:#000;transform:translateY(-5px)}
-    .copyright{height:14px;opacity:.4}
-    @media(max-width:768px){.nav-links{display:none}.hero-logo{width:150px;height:150px}.hero-title{height:40px}.stores{flex-direction:column;align-items:center}}
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; user-select: none; }
+    html::-webkit-scrollbar { display: none; }
+    html { scrollbar-width: none; scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+    
+    /* LOADER */
+    .loader { position: fixed; inset: 0; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; animation: loaderFade 0.8s ease 2.5s forwards; }
+    .loader-hex { position: absolute; width: 250px; height: 250px; animation: hexSpin 4s linear infinite; }
+    .loader-hex svg { width: 100%; height: 100%; }
+    .loader-bee { font-size: 80px; animation: beeBounce 0.6s ease-in-out infinite; position: relative; z-index: 2; }
+    .loader-text { color: #FFD700; font-size: 24px; font-weight: 900; margin-top: 20px; letter-spacing: 4px; animation: pulse 1s ease-in-out infinite; }
+    .loader-bar { width: 200px; height: 4px; background: #222; border-radius: 4px; margin-top: 30px; overflow: hidden; }
+    .loader-fill { height: 100%; background: linear-gradient(90deg, #FFD700, #FF8F00); width: 0%; animation: loadFill 2s ease forwards; }
+    @keyframes hexSpin { to { transform: rotate(360deg); } }
+    @keyframes beeBounce { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
+    @keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes loadFill { 0% { width: 0%; } 100% { width: 100%; } }
+    @keyframes loaderFade { to { opacity: 0; pointer-events: none; } }
+    
+    /* PARTICLES */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+    .p { position: absolute; background: #FFD700; border-radius: 50%; animation: rise linear infinite; }
+    @keyframes rise { 0% { transform: translateY(100vh); opacity: 0; } 10%,90% { opacity: 0.4; } 100% { transform: translateY(-100vh); opacity: 0; } }
+    
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,215,0,0.1); z-index: 100; transform: translateY(-100%); animation: navSlide 0.5s ease 2.8s forwards; }
+    @keyframes navSlide { to { transform: translateY(0); } }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 900; color: #FFD700; }
+    .logo span { font-size: 28px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: #aaa; text-decoration: none; font-weight: 500; transition: all 0.3s; }
+    .nav-links a:hover { color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+    .shop-btn { background: linear-gradient(135deg, #FFD700, #FF8F00); color: #000; padding: 10px 24px; border: none; border-radius: 8px; font-weight: 700; transition: all 0.3s; }
+    .shop-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,215,0,0.3); }
+    
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background: radial-gradient(ellipse at center, rgba(255,215,0,0.05) 0%, transparent 70%); position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l21.65 12.5v25L30 55 8.35 42.5v-25L30 5z' fill='none' stroke='%23FFD700' stroke-opacity='0.04'/%3E%3C/svg%3E"); animation: panBg 80s linear infinite; pointer-events: none; }
+    @keyframes panBg { to { background-position: 500px 500px; } }
+    .hero-content { opacity: 0; animation: fadeUp 0.8s ease 2.9s forwards; position: relative; z-index: 2; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-icon { font-size: 140px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 50px rgba(255,215,0,0.4)); }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-25px) rotate(3deg); } }
+    .hero h1 { font-size: 60px; font-weight: 900; background: linear-gradient(135deg, #FFD700, #FFC107, #FF8F00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 20px 0 10px; letter-spacing: 3px; }
+    .hero p { color: #777; font-size: 18px; margin-bottom: 35px; }
+    .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { background: linear-gradient(135deg, #FFD700, #FF8F00); color: #000; padding: 15px 35px; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px rgba(255,215,0,0.4); }
+    .btn-secondary { background: transparent; color: #FFD700; padding: 15px 35px; border: 2px solid #FFD700; border-radius: 10px; font-weight: 600; font-size: 15px; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .btn-secondary:hover { background: rgba(255,215,0,0.1); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255,215,0,0.2); }
+    .scroll-hint { position: absolute; bottom: 30px; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp 0.8s ease 3.3s forwards; }
+    .mouse { width: 24px; height: 38px; border: 2px solid rgba(255,215,0,0.5); border-radius: 12px; position: relative; }
+    .wheel { width: 4px; height: 8px; background: #FFD700; border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: wheelScroll 1.5s ease-in-out infinite; }
+    @keyframes wheelScroll { 0%,100% { top: 6px; opacity: 1; } 50% { top: 18px; opacity: 0.3; } }
+    
+    /* SECTIONS */
+    .section { padding: 100px 5%; position: relative; z-index: 2; }
+    .section-title { text-align: center; font-size: 38px; font-weight: 800; color: #FFD700; margin-bottom: 10px; }
+    .section-sub { text-align: center; color: #555; font-size: 16px; }
+    .gold-line { width: 70px; height: 4px; background: linear-gradient(90deg, #FFD700, #FF8F00); margin: 20px auto 50px; border-radius: 2px; }
+    
+    /* PRODUCTS */
+    .products-section { background: linear-gradient(180deg, transparent, rgba(255,215,0,0.02), transparent); }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+    .card { background: linear-gradient(145deg, #141414, #0a0a0a); border: 1px solid rgba(255,215,0,0.1); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.4s; }
+    .card:hover { transform: translateY(-15px); border-color: #FFD700; box-shadow: 0 30px 60px rgba(255,215,0,0.15); }
+    .card-icon { font-size: 50px; margin-bottom: 15px; display: block; }
+    .card h3 { font-size: 20px; margin-bottom: 8px; }
+    .card p { color: #666; font-size: 14px; margin-bottom: 15px; }
+    .card-price { font-size: 26px; font-weight: 800; color: #FFD700; margin-bottom: 20px; }
+    .card-btn { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,143,0,0.1)); border: 1px solid rgba(255,215,0,0.3); color: #FFD700; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; display: inline-block; text-decoration: none; }
+    .card-btn:hover { background: linear-gradient(135deg, #FFD700, #FF8F00); color: #000; transform: scale(1.05); }
+    
+    /* WHERE TO BUY */
+    .stores-section { background: linear-gradient(180deg, rgba(255,215,0,0.02), transparent); }
+    .stores { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+    .store { background: linear-gradient(145deg, #141414, #0a0a0a); border: 1px solid rgba(255,215,0,0.1); border-radius: 20px; padding: 40px 50px; text-align: center; transition: all 0.4s; min-width: 250px; text-decoration: none; display: block; }
+    .store:hover { transform: translateY(-10px); border-color: #FFD700; box-shadow: 0 25px 50px rgba(255,215,0,0.1); }
+    .store-icon { font-size: 40px; color: #FFD700; margin-bottom: 15px; display: block; }
+    .store h3 { color: #fff; font-size: 20px; margin-bottom: 5px; }
+    .store p { color: #555; font-size: 13px; }
+    
+    /* FEATURES */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; }
+    .feature { text-align: center; padding: 25px; border-radius: 16px; transition: all 0.3s; }
+    .feature:hover { background: rgba(255,215,0,0.03); }
+    .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,143,0,0.05)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; color: #FFD700; }
+    .feature h3 { font-size: 16px; margin-bottom: 8px; }
+    .feature p { color: #555; font-size: 13px; }
+    
+    /* FOOTER */
+    footer { padding: 50px 5%; border-top: 1px solid rgba(255,215,0,0.1); text-align: center; position: relative; z-index: 2; }
+    .footer-logo { font-size: 40px; margin-bottom: 20px; opacity: 0.5; }
+    .socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+    .socials a { width: 45px; height: 45px; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFD700; font-size: 18px; transition: all 0.3s; text-decoration: none; }
+    .socials a:hover { background: #FFD700; color: #000; transform: translateY(-5px); }
+    .copyright { color: #444; font-size: 13px; }
+    
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 36px; }
+      .hero-icon { font-size: 100px; }
+      .section-title { font-size: 28px; }
+    }
   </style>
 </head>
 <body>
+  <!-- LOADER -->
   <div class="loader">
-    <svg class="loader-hexagons" viewBox="0 0 200 200"><polygon class="loader-hex" points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="#FFD700" stroke-width="1"/><polygon class="loader-hex" points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="#FFD700" stroke-width="1"/><polygon class="loader-hex" points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="#FFD700" stroke-width="1"/></svg>
-    <svg class="loader-bee" viewBox="0 0 100 100"><g transform="translate(50,50)"><ellipse cx="0" cy="5" rx="18" ry="24" fill="#FFD700"/><rect x="-16" y="-4" width="32" height="6" fill="#111" rx="3"/><rect x="-14" y="10" width="28" height="5" fill="#111" rx="2"/><circle cx="0" cy="-22" r="12" fill="#111"/><ellipse cx="-5" cy="-24" rx="3" ry="4" fill="#FFD700"/><ellipse cx="5" cy="-24" rx="3" ry="4" fill="#FFD700"/><ellipse cx="-22" cy="-8" rx="14" ry="9" fill="#FFD700" opacity=".5" transform="rotate(-15)"/><ellipse cx="22" cy="-8" rx="14" ry="9" fill="#FFD700" opacity=".5" transform="rotate(15)"/></g></svg>
-    <svg class="loader-text" viewBox="0 0 200 30"><text x="100" y="22" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="900" font-size="16">SUPREME SWARM</text></svg>
-    <div class="loader-bar-container"><div class="loader-bar"></div></div>
-  </div>
-  <div class="particles"><div class="particle" style="left:5%;width:4px;height:4px;animation-duration:15s"></div><div class="particle" style="left:15%;width:6px;height:6px;animation-duration:20s;animation-delay:2s"></div><div class="particle" style="left:25%;width:3px;height:3px;animation-duration:18s;animation-delay:4s"></div><div class="particle" style="left:35%;width:5px;height:5px;animation-duration:22s;animation-delay:1s"></div><div class="particle" style="left:45%;width:4px;height:4px;animation-duration:16s;animation-delay:3s"></div><div class="particle" style="left:55%;width:7px;height:7px;animation-duration:25s;animation-delay:5s"></div><div class="particle" style="left:65%;width:3px;height:3px;animation-duration:19s"></div><div class="particle" style="left:75%;width:5px;height:5px;animation-duration:21s;animation-delay:2s"></div><div class="particle" style="left:85%;width:4px;height:4px;animation-duration:17s;animation-delay:4s"></div><div class="particle" style="left:95%;width:6px;height:6px;animation-duration:23s;animation-delay:1s"></div></div>
-  <nav>
-    <div class="logo">
-      <svg viewBox="0 0 80 80"><polygon points="40,5 72,22 72,58 40,75 8,58 8,22" fill="none" stroke="#FFD700" stroke-width="2"/><g transform="translate(40,40) scale(.35)"><ellipse cx="0" cy="5" rx="22" ry="30" fill="#FFD700"/><rect x="-20" y="-5" width="40" height="8" fill="#111" rx="4"/><rect x="-18" y="12" width="36" height="7" fill="#111" rx="3"/><circle cx="0" cy="-30" r="14" fill="#111"/><ellipse cx="-6" cy="-32" rx="4" ry="5" fill="#FFD700"/><ellipse cx="6" cy="-32" rx="4" ry="5" fill="#FFD700"/><ellipse cx="-28" cy="-10" rx="16" ry="10" fill="#FFD700" opacity=".5" transform="rotate(-20)"/><ellipse cx="28" cy="-10" rx="16" ry="10" fill="#FFD700" opacity=".5" transform="rotate(20)"/></g></svg>
-      <svg class="logo-text" viewBox="0 0 200 30"><defs><linearGradient id="tG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FF8F00"/></linearGradient></defs><text x="0" y="22" fill="url(#tG)" font-family="Segoe UI,system-ui,sans-serif" font-weight="900" font-size="18">SUPREME SWARM</text></svg>
+    <div class="loader-hex">
+      <svg viewBox="0 0 100 100"><polygon points="50,5 93,27.5 93,72.5 50,95 7,72.5 7,27.5" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.3"/></svg>
     </div>
+    <div class="loader-bee">🐝</div>
+    <div class="loader-text">SUPREME SWARM</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+
+  <!-- PARTICLES -->
+  <div class="particles">
+    <div class="p" style="left:5%;width:4px;height:4px;animation-duration:12s"></div>
+    <div class="p" style="left:15%;width:6px;height:6px;animation-duration:18s;animation-delay:1s"></div>
+    <div class="p" style="left:25%;width:3px;height:3px;animation-duration:15s;animation-delay:3s"></div>
+    <div class="p" style="left:40%;width:5px;height:5px;animation-duration:20s;animation-delay:2s"></div>
+    <div class="p" style="left:55%;width:4px;height:4px;animation-duration:14s;animation-delay:4s"></div>
+    <div class="p" style="left:70%;width:6px;height:6px;animation-duration:22s;animation-delay:1s"></div>
+    <div class="p" style="left:85%;width:3px;height:3px;animation-duration:16s;animation-delay:3s"></div>
+    <div class="p" style="left:95%;width:5px;height:5px;animation-duration:19s;animation-delay:2s"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo"><span>🐝</span> SUPREME SWARM</div>
     <ul class="nav-links">
-      <li><a href="#products"><svg viewBox="0 0 70 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI,system-ui,sans-serif" font-weight="500" font-size="14">Products</text></svg></a></li>
-      <li><a href="#stores"><svg viewBox="0 0 100 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI,system-ui,sans-serif" font-weight="500" font-size="14">Where to Buy</text></svg></a></li>
-      <li><a href="#features"><svg viewBox="0 0 60 20"><text x="0" y="15" fill="#ccc" font-family="Segoe UI,system-ui,sans-serif" font-weight="500" font-size="14">Why Us</text></svg></a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#stores">Where to Buy</a></li>
+      <li><a href="#features">Why Us</a></li>
     </ul>
-    <button class="btn"><svg viewBox="0 0 80 18"><text x="40" y="13" text-anchor="middle" fill="#000" font-family="Segoe UI,system-ui,sans-serif" font-weight="700" font-size="13">Shop Now</text></svg></button>
+    <a href="#products" class="shop-btn">Shop Now</a>
   </nav>
+
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <svg class="hero-logo" viewBox="0 0 200 200"><defs><linearGradient id="gG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD700"/><stop offset="50%" stop-color="#FFC107"/><stop offset="100%" stop-color="#FF8F00"/></linearGradient><filter id="gl"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><polygon points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="url(#gG)" stroke-width="4" filter="url(#gl)"/><polygon points="100,30 160,65 160,135 100,170 40,135 40,65" fill="#111" stroke="#B8860B" stroke-width="2"/><g transform="translate(100,100)"><ellipse cx="0" cy="5" rx="22" ry="30" fill="url(#gG)"/><rect x="-20" y="-5" width="40" height="8" fill="#111" rx="4"/><rect x="-18" y="12" width="36" height="7" fill="#111" rx="3"/><rect x="-14" y="26" width="28" height="6" fill="#111" rx="3"/><circle cx="0" cy="-30" r="16" fill="#111"/><ellipse cx="-6" cy="-32" rx="4" ry="5" fill="#FFD700"/><ellipse cx="6" cy="-32" rx="4" ry="5" fill="#FFD700"/><circle cx="-5" cy="-33" r="1.5" fill="#111"/><circle cx="7" cy="-33" r="1.5" fill="#111"/><path d="M-5,-45 Q-8,-55 -12,-58" stroke="#FFD700" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M5,-45 Q8,-55 12,-58" stroke="#FFD700" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="-12" cy="-58" r="3" fill="#FFD700"/><circle cx="12" cy="-58" r="3" fill="#FFD700"/><ellipse cx="-28" cy="-10" rx="18" ry="12" fill="#FFD700" opacity=".4" transform="rotate(-20,-28,-10)"/><ellipse cx="28" cy="-10" rx="18" ry="12" fill="#FFD700" opacity=".4" transform="rotate(20,28,-10)"/></g></svg>
-      <svg class="hero-title" viewBox="0 0 500 70"><defs><linearGradient id="hG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFD700"/><stop offset="50%" stop-color="#FFC107"/><stop offset="100%" stop-color="#B8860B"/></linearGradient></defs><text x="250" y="50" text-anchor="middle" fill="url(#hG)" font-family="Segoe UI,system-ui,sans-serif" font-weight="900" font-size="52" letter-spacing=".05em">SUPREME SWARM</text></svg>
-      <svg class="hero-subtitle" viewBox="0 0 380 24"><text x="190" y="18" text-anchor="middle" fill="#888" font-family="Segoe UI,system-ui,sans-serif" font-size="16">Premium Bee Swarm Simulator Items & Accounts</text></svg>
-      <div class="hero-buttons">
-        <button class="btn"><svg viewBox="0 0 140 18"><text x="70" y="13" text-anchor="middle" fill="#000" font-family="Segoe UI,system-ui,sans-serif" font-weight="700" font-size="13">Browse Collection</text></svg></button>
-        <button class="btn-outline"><svg viewBox="0 0 100 18"><text x="50" y="13" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="600" font-size="13">Learn More</text></svg></button>
+      <div class="hero-icon">🐝</div>
+      <h1>SUPREME SWARM</h1>
+      <p>Premium Bee Swarm Simulator Items & Accounts</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">Browse Collection</a>
+        <a href="#features" class="btn-secondary">Learn More</a>
       </div>
     </div>
-    <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><div class="scroll-arrows"><span></span><span></span><span></span></div></div>
+    <div class="scroll-hint">
+      <div class="mouse"><div class="wheel"></div></div>
+    </div>
   </section>
+
+  <!-- PRODUCTS -->
   <section class="section products-section" id="products">
-    <div class="section-header">
-      <svg class="section-title" viewBox="0 0 300 45"><text x="150" y="35" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="800" font-size="36">Featured Items</text></svg>
-      <div class="section-line"></div>
-    </div>
+    <h2 class="section-title">Featured Items</h2>
+    <p class="section-sub">Top-tier Bee Swarm Simulator goods</p>
+    <div class="gold-line"></div>
     <div class="products">
-      <div class="product-card">
-        <div class="product-icon">🐝</div>
-        <svg class="product-title" viewBox="0 0 160 24"><text x="80" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI,system-ui,sans-serif" font-weight="600" font-size="17">Mythic Bee Pack</text></svg>
-        <svg class="product-desc" viewBox="0 0 220 16"><text x="110" y="12" text-anchor="middle" fill="#777" font-family="Segoe UI,system-ui,sans-serif" font-size="12">5 Mythic Bees of your choice</text></svg>
-        <svg class="product-price" viewBox="0 0 100 28"><text x="50" y="22" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="700" font-size="22">$24.99</text></svg>
+      <div class="card">
+        <span class="card-icon">🐝</span>
+        <h3>Mythic Bee Pack</h3>
+        <p>5 Mythic Bees of your choice</p>
+        <div class="card-price">$24.99</div>
+        <a href="#" class="card-btn">Add to Cart</a>
       </div>
-      <div class="product-card">
-        <div class="product-icon">🍯</div>
-        <svg class="product-title" viewBox="0 0 160 24"><text x="80" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI,system-ui,sans-serif" font-weight="600" font-size="17">Honey Bundle</text></svg>
-        <svg class="product-desc" viewBox="0 0 220 16"><text x="110" y="12" text-anchor="middle" fill="#777" font-family="Segoe UI,system-ui,sans-serif" font-size="12">100 Trillion Honey Instant</text></svg>
-        <svg class="product-price" viewBox="0 0 100 28"><text x="50" y="22" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="700" font-size="22">$14.99</text></svg>
+      <div class="card">
+        <span class="card-icon">🍯</span>
+        <h3>Honey Bundle</h3>
+        <p>100 Trillion Honey Instant</p>
+        <div class="card-price">$14.99</div>
+        <a href="#" class="card-btn">Add to Cart</a>
       </div>
-      <div class="product-card">
-        <div class="product-icon">⭐</div>
-        <svg class="product-title" viewBox="0 0 180 24"><text x="90" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI,system-ui,sans-serif" font-weight="600" font-size="17">Gifted Bee Bundle</text></svg>
-        <svg class="product-desc" viewBox="0 0 220 16"><text x="110" y="12" text-anchor="middle" fill="#777" font-family="Segoe UI,system-ui,sans-serif" font-size="12">10 Gifted Bees + Star Treats</text></svg>
-        <svg class="product-price" viewBox="0 0 100 28"><text x="50" y="22" text-anchor="middle" fill="#FFD700" font-family="Segoe UI,system-ui,sans-serif" font-weight="700" font-size="22">$19.99</text></svg>
+      <div class="card">
+        <span class="card-icon">⭐</span>
+        <h3>Gifted Bee Bundle</h3>
+        <p>10 Gifted Bees + Star Treats</p>
+        <div class="card-price">$19.99</div>
+        <a href="#" class="card-btn">Add to Cart</a>
       </div>
-      <div class="product-card">
-        <div class="product-icon">👑</div>
-        <svg class="product-title" viewBox="0 0 180 24"><text x="90" y="18" text-anchor="middle" fill="#fff" font-family="Segoe UI,system-ui,sans-serif" font-weight="600" font-size="17">Stacked Account</text></svg>
-        <svg class="product-desc" viewBox="0 0 220 16"><text x="110" y="12
+      <div class="card">
+        <span class="card-icon">👑</span>
+        <h3>Stacked Account</h3>
+        <p>Endgame account with all items</p>
+        <div class="card-price">$149.99</div>
+        <a href="#" class="card-btn">Add to Cart</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE TO BUY -->
+  <section class="section stores-section" id="stores">
+    <h2 class="section-title">Where to Buy</h2>
+    <p class="section-sub">Shop on your favorite platform</p>
+    <div class="gold-line"></div>
+    <div class="stores">
+      <a href="https://discord.com" target="_blank" class="store">
+        <span class="store-icon"><i class="fab fa-discord"></i></span>
+        <h3>Discord</h3>
+        <p>Join our server to purchase</p>
+      </a>
+      <a href="https://roblox.com" target="_blank" class="store">
+        <span class="store-icon"><i class="fas fa-gamepad"></i></span>
+        <h3>Roblox</h3>
+        <p>Trade in-game directly</p>
+      </a>
+      <a href="#" class="store">
+        <span class="store-icon"><i class="fas fa-store"></i></span>
+        <h3>Website Shop</h3>
+        <p>Coming soon</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <h2 class="section-title">Why Supreme Swarm?</h2>
+    <p class="section-sub">Trusted by thousands of players</p>
+    <div class="gold-line"></div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Instant Delivery</h3>
+        <p>Get your items within minutes</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>100% Safe</h3>
+        <p>Secure transactions guaranteed</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <h3>24/7 Support</h3>
+        <p>We're always here to help</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-tags"></i></div>
+        <h3>Best Prices</h3>
+        <p>Unbeatable market rates</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🐝</div>
+    <div class="socials">
+      <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p class="copyright">© 2025 Supreme Swarm. All rights reserved.</p>
+  </footer>
+</body>
+</html>
