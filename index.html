@@ -4,202 +4,277 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supreme Swarm | Premium Bee Swarm Simulator Shop</title>
-  <meta name="description" content="Instant delivery of Mythic Bees, Honey, Gifted Bees & endgame accounts for Bee Swarm Simulator. Trusted by thousands." />
+  <meta name="description" content="Instant Mythic Bees, Trillions of Honey & Endgame Accounts – Supreme Swarm" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
     :root {
       --gold: #FFD700;
       --orange: #FF8F00;
       --dark: #0a0a0a;
-      --darker: #111;
-      --text: #fff;
-      --muted: #777;
+      --glow: rgba(255, 215, 0, 0.4);
+      --glow-strong: rgba(255, 215, 0, 0.7);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { 
-      font-family:'Segoe UI', system-ui, sans-serif; 
-      background:var(--dark); 
-      color:var(--text); 
-      overflow-x:hidden; 
-      line-height:1.5;
+    body {
+      font-family:'Segoe UI', system-ui, sans-serif;
+      background:var(--dark);
+      color:#fff;
+      overflow-x:hidden;
+      min-height:100vh;
     }
     body.cart-open { overflow:hidden; }
 
-    /* Loader */
+    /* Loader – Faster & Glowier */
     .loader {
-      position:fixed; inset:0; background:var(--dark); 
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      z-index:9999; transition:opacity .6s, visibility .6s;
+      position:fixed; inset:0; background:var(--dark);
+      display:grid; place-items:center; gap:1.5rem;
+      z-index:9999; transition:opacity .7s, visibility .7s;
     }
     .loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-    .loader-bee { font-size:5rem; animation:beeBounce 1s infinite; }
-    .loader-text { color:var(--gold); font-size:1.8rem; font-weight:900; letter-spacing:4px; margin-top:1rem; }
-    .loader-bar { width:220px; height:5px; background:#222; border-radius:4px; margin-top:2rem; overflow:hidden; }
-    .loader-fill { height:100%; width:0; background:linear-gradient(90deg,var(--gold),var(--orange)); animation:load 2.2s forwards; }
+    .loader-bee { font-size:6rem; filter:drop-shadow(0 0 30px var(--glow-strong)); animation:beeFloat 2s infinite; }
+    .loader-text {
+      color:var(--gold); font-size:2.2rem; font-weight:900; letter-spacing:6px;
+      text-shadow:0 0 20px var(--glow-strong), 0 0 40px var(--glow);
+      animation:pulseGlow 1.5s infinite;
+    }
+    .loader-bar { width:260px; height:6px; background:#222; border-radius:6px; overflow:hidden; }
+    .loader-fill { height:100%; width:0; background:linear-gradient(90deg,var(--gold),var(--orange)); 
+                   box-shadow:0 0 20px var(--glow-strong); animation:load 2s forwards; }
 
-    @keyframes beeBounce { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+    @keyframes beeFloat { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-30px) rotate(4deg)} }
+    @keyframes pulseGlow { 0%,100%{opacity:.7} 50%{opacity:1} }
     @keyframes load { to{width:100%} }
 
-    /* Particles */
-    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
-    .particle { position:absolute; background:var(--gold); border-radius:50%; opacity:0; animation:rise linear infinite; }
-    @keyframes rise { 
-      0% { transform:translateY(100vh) rotate(0deg); opacity:0; }
-      10% { opacity:.6; }
-      90% { opacity:.3; }
-      100% { transform:translateY(-100px) rotate(720deg); opacity:0; }
-    }
-
-    /* Nav */
+    /* Transparent + Heavy Blur Navbar */
     nav {
-      position:fixed; top:0; left:0; right:0; padding:1rem 5%; 
+      position:fixed; top:0; left:0; right:0; padding:1rem 5%;
       display:flex; justify-content:space-between; align-items:center;
-      background:rgba(10,10,10,.95); backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,215,0,.1); z-index:100;
-      transform:translateY(-100%); animation:slideDown .6s 2.4s forwards;
+      background:transparent;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,215,0,.15);
+      z-index:1000;
+      box-shadow:0 8px 32px rgba(0,0,0,.4);
+      animation:slideDown .7s 2.3s forwards;
+      transform:translateY(-120%);
     }
     @keyframes slideDown { to{transform:translateY(0)} }
 
-    .logo { font-size:1.4rem; font-weight:900; color:var(--gold); display:flex; align-items:center; gap:.5rem; }
-    .logo span { font-size:2rem; }
+    .logo {
+      font-size:1.5rem; font-weight:900; color:var(--gold);
+      display:flex; align-items:center; gap:.6rem;
+      text-shadow:0 0 15px var(--glow);
+    }
+    .logo span { font-size:2.4rem; filter:drop-shadow(0 0 20px var(--glow-strong)); }
 
-    .nav-links { display:flex; gap:2rem; list-style:none; }
-    .nav-links a { color:#aaa; text-decoration:none; font-weight:500; position:relative; transition:.3s; }
-    .nav-links a::after { content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--gold); transition:.3s; }
-    .nav-links a:hover { color:var(--gold); }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; }
+    .nav-links a {
+      color:#ccc; text-decoration:none; font-weight:600; position:relative;
+      transition:.3s; text-shadow:0 0 5px rgba(255,215,0,.2);
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-8px; left:0; width:0; height:2px;
+      background:var(--gold); box-shadow:0 0 10px var(--glow); transition:.4s;
+    }
+    .nav-links a:hover { color:var(--gold); text-shadow:0 0 15px var(--glow-strong); }
     .nav-links a:hover::after { width:100%; }
 
-    .nav-right { display:flex; align-items:center; gap:1rem; }
+    .nav-right { display:flex; align-items:center; gap:1.2rem; }
     .cart-btn {
-      position:relative; background:rgba(255,215,0,.1); border:1px solid rgba(255,215,0,.3);
-      color:var(--gold); width:48px; height:48px; border-radius:50%;
-      font-size:1.3rem; cursor:pointer; transition:.3s;
+      position:relative; background:rgba(255,215,0,.12); border:1px solid rgba(255,215,0,.3);
+      color:var(--gold); width:52px; height:52px; border-radius:50%; font-size:1.4rem;
+      cursor:pointer; transition:.4s; backdrop-filter:blur(4px);
+      box-shadow:0 0 20px rgba(255,215,0,.2);
     }
-    .cart-btn:hover { background:rgba(255,215,0,.2); transform:scale(1.1); }
+    .cart-btn:hover {
+      background:rgba(255,215,0,.25); transform:scale(1.12) rotate(8deg);
+      box-shadow:0 0 30px var(--glow-strong);
+    }
     .cart-count {
-      position:absolute; top:-6px; right:-6px; background:var(--orange); color:#000;
-      font-size:.75rem; font-weight:700; width:22px; height:22px; border-radius:50%;
-      display:grid; place-items:center;
+      position:absolute; top:-8px; right:-8px; background:var(--orange);
+      color:#000; font-weight:900; font-size:.8rem; width:24px; height:24px;
+      border-radius:50%; display:grid; place-items:center;
+      box-shadow:0 0 15px var(--glow);
     }
 
     .shop-btn {
-      background:linear-gradient(135deg,var(--gold),var(--orange)); color:#000;
-      padding:.7rem 1.5rem; border:none; border-radius:8px; font-weight:700; text-decoration:none;
-      transition:.3s; box-shadow:0 4px 15px rgba(255,215,0,.3);
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#000; padding:.8rem 1.8rem; border:none; border-radius:12px;
+      font-weight:800; text-decoration:none; transition:.4s;
+      box-shadow:0 8px 25px rgba(255,215,0,.4);
     }
-    .shop-btn:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(255,215,0,.4); }
+    .shop-btn:hover {
+      transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,215,0,.6);
+    }
 
-    /* Cart Sidebar */
-    .cart-overlay { 
-      position:fixed; inset:0; background:rgba(0,0,0,.8); backdrop-filter:blur(8px);
-      opacity:0; visibility:hidden; transition:.4s; z-index:200;
+    /* Cart Sidebar – Glowing */
+    .cart-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(10px);
+      opacity:0; visibility:hidden; transition:.5s; z-index:200;
     }
     .cart-overlay.open { opacity:1; visibility:visible; }
 
     .cart-sidebar {
-      position:fixed; top:0; right:-420px; width:420px; max-width:95%; height:100%;
-      background:linear-gradient(180deg,#111,#0a0a0a); border-left:1px solid rgba(255,215,0,.2);
-      z-index:201; transition:right .4s cubic-bezier(.4,0,.2,1); box-shadow:-10px 0 40px rgba(0,0,0,.6);
+      position:fixed; top:0; right:-440px; width:440px; max-width:95%; height:100%;
+      background:linear-gradient(180deg,#0f0f0f,#080808);
+      border-left:2px solid rgba(255,215,0,.3);
+      box-shadow:-20px 0 60px rgba(0,0,0,.7), 0 0 40px var(--glow);
+      z-index:201; transition:right .5s cubic-bezier(.2,.8,.4,1);
       display:flex; flex-direction:column;
     }
     .cart-sidebar.open { right:0; }
 
-    .cart-header { padding:1.5rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,215,0,.1); }
-    .cart-header h2 { color:var(--gold); display:flex; align-items:center; gap:.5rem; }
-    .cart-close { background:transparent; border:none; color:#aaa; font-size:1.5rem; cursor:pointer; transition:.3s; }
+    .cart-header {
+      padding:1.8rem; border-bottom:1px solid rgba(255,215,0,.2);
+      display:flex; justify-content:space-between; align-items:center;
+      background:rgba(255,215,0,.03);
+    }
+    .cart-header h2 { color:var(--gold); font-size:1.4rem; display:flex; gap:.6rem; align-items:center; }
+
+    .cart-close {
+      background:transparent; border:none; color:#aaa; font-size:1.8rem;
+      cursor:pointer; transition:.3s;
+    }
     .cart-close:hover { color:#ff4444; transform:rotate(90deg); }
 
     .cart-items { flex:1; overflow-y:auto; padding:1.5rem; }
-    .cart-empty { text-align:center; color:#555; padding:4rem 1rem; }
-    .cart-empty i { font-size:4rem; color:#333; margin-bottom:1rem; }
+    .cart-empty { text-align:center; padding:4rem 1rem; color:#666; }
+    .cart-empty i { font-size:4.5rem; color:#333; margin-bottom:1rem; }
 
     .cart-item {
-      background:rgba(255,215,0,.05); border:1px solid rgba(255,215,0,.1);
-      border-radius:16px; padding:1rem; margin-bottom:1rem;
-      display:flex; align-items:center; gap:1rem;
+      background:rgba(255,215,0,.06); border:1px solid rgba(255,215,0,.25);
+      border-radius:18px; padding:1.2rem; margin-bottom:1rem;
+      display:flex; align-items:center; gap:1.2rem;
+      box-shadow:0 5px 20px rgba(0,0,0,.3);
+      transition:.3s;
     }
-    .cart-item-icon { font-size:2.5rem; }
-    .cart-item-info { flex:1; }
-    .cart-item-name { font-weight:600; }
-    .cart-item-price { color:var(--gold); font-weight:700; }
+    .cart-item:hover { border-color:var(--gold); box-shadow:0 0 25px var(--glow); }
 
-    .qty-btn { background:rgba(255,215,0,.1); border:1px solid rgba(255,215,0,.3); color:var(--gold); width:36px; height:36px; border-radius:8px; cursor:pointer; }
-    .qty-btn:hover { background:var(--gold); color:#000; }
-
-    .cart-total { display:flex; justify-content:space-between; font-size:1.1rem; margin-bottom:1rem; padding:0 1.5rem; }
-    .cart-total strong { color:var(--gold); font-size:2rem; }
+    .qty-btn {
+      background:rgba(255,215,0,.15); border:1px solid rgba(255,215,0,.4);
+      color:var(--gold); width:40px; height:40px; border-radius:10px;
+      cursor:pointer; font-weight:bold; transition:.3s;
+    }
+    .qty-btn:hover { background:var(--gold); color:#000; transform:scale(1.1); }
 
     .checkout-btn {
-      margin:1.5rem; padding:1.2rem; background:linear-gradient(135deg,var(--gold),var(--orange));
-      color:#000; border:none; border-radius:12px; font-weight:700; cursor:pointer;
-      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      margin:1.5rem; padding:1.3rem; background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#000; border:none; border-radius:14px; font-size:1.1rem; font-weight:800;
+      cursor:pointer; box-shadow:0 10px 30px rgba(255,215,0,.5);
+      transition:.4s;
     }
-    .checkout-btn:disabled { opacity:.5; cursor:not-allowed; }
+    .checkout-btn:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(255,215,0,.7); }
+    .checkout-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
 
-    /* Hero */
+    /* Hero – Maximum Glow */
     .hero {
-      min-height:100vh; display:grid; place-items:center; text-align:center; padding:2rem;
-      background:radial-gradient(circle at center, rgba(255,215,0,.06), transparent 70%);
-      position:relative;
+      min-height:100vh; display:grid; place-items:center; text-align:center;
+      padding:2rem; position:relative;
+      background:radial-gradient(circle at center, rgba(255,215,0,.1) 0%, transparent 70%);
     }
-    .hero h1 {
-      font-size:clamp(3rem, 8vw, 6rem); font-weight:900;
-      background:linear-gradient(135deg,var(--gold),#FFC107,var(--orange));
-      -webkit-background-clip:text; background-clip:text;
-      -webkit-text-fill-color:transparent; margin:1rem 0;
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 50% 30%, rgba(255,215,0,.25), transparent 60%);
+      animation:glowPulse  8s infinite alternate;
+      pointer-events:none;
     }
-    .hero p { font-size:1.2rem; color:var(--muted); max-width:600px; margin:0 auto 2rem; }
+    @keyframes glowBg { 0%{opacity:.3} 100%{opacity:.6} }
 
-    .btn-primary, .btn-secondary {
-      padding:1rem 2rem; border-radius:12px; font-weight:700; text-decoration:none;
-      display:inline-flex; align-items:center; gap:.5rem; transition:.3s;
+    .hero h1 {
+      font-size:clamp(3.5rem,9vw,7rem); font-weight:900; margin:1.5rem 0;
+      background:linear-gradient(135deg,#FFD700,#FFC107,#FF8F00,#FFD700);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 40px var(--glow-strong), 0 0 80px var(--glow);
+      animation:shimmer 4s infinite;
     }
-    .btn-primary { background:linear-gradient(135deg,var(--gold),var(--orange)); color:#000; }
-    .btn-primary:hover { transform:translateY(-4px); box-shadow:0 20px 40px rgba(255,215,0,.4); }
-    .btn-secondary { border:2px solid var(--gold); color:var(--gold); }
-    .btn-secondary:hover { background:rgba(255,215,0,.1); }
+    @keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.4)} }
+
+    .hero p { font-size:1.3rem; color:#aaa; margin-bottom:2rem; }
+
+    .btn-primary {
+      background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#000; padding:1.1rem 2.5rem; border-radius:14px;
+      font-weight:800; text-decoration:none; display:inline-flex; gap:.6rem;
+      align-items:center; box-shadow:0 10px 30px rgba(255,215,0,.5);
+      transition:.4s;
+    }
+    .btn-primary:hover {
+      transform:translateY(-6px) scale(1.05);
+      box-shadow:0 20px 50px rgba(255,215,0,.7);
+    }
 
     /* Sections */
-    .section { padding:6rem 5%; text-align:center; }
-    .section-title { font-size:2.8rem; color:var(--gold); margin-bottom:.5rem; }
-    .gold-line { width:80px; height:4px; background:linear-gradient(90deg,var(--gold),var(--orange)); margin:2rem auto; border-radius:2px; }
-
-    .products { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:2rem; max-width:1300px; margin:0 auto; }
-    .card {
-      background:linear-gradient(145deg,#141414,#0a0a0a); border:1px solid rgba(255,215,0,.1);
-      border-radius:20px; padding:2rem; text-align:center; transition:.4s;
-      position:relative; overflow:hidden;
+    .section { padding:7rem 5%; text-align:center; }
+    .section-title {
+      font-size:3rem; color:var(--gold); margin-bottom:.8rem;
+      text-shadow:0 0 20px var(--glow);
     }
-    .card:hover { transform:translateY(-15px); border-color:var(--gold); box-shadow:0 30px 60px rgba(255,215,0,.2); }
-    .card-icon { font-size:3.5rem; margin-bottom:1rem; }
-    .card-price { font-size:2rem; color:var(--gold); font-weight:800; margin:1rem 0; }
+    .gold-line {
+      width:100px; height:5px; background:linear-gradient(90deg,var(--gold),var(--orange));
+      margin:2rem auto; border-radius:4px;
+      box-shadow:0 0 20px var(--glow-strong);
+    }
+
+    .products {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem; max-width:1400px; margin:0 auto;
+    }
+    .card {
+      background:linear-gradient(145deg,#111,#0a0a0a);
+      border:1px solid rgba(255,215,0,.2); border-radius:24px;
+      padding:2.5rem; text-align:center; transition:.5s;
+      box-shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+    .card:hover {
+      transform:translateY(-20px) scale(1.03);
+      border-color:var(--gold);
+      box-shadow:0 30px 80px rgba(255,215,0,.3);
+    }
+    .card-icon { font-size:4rem; margin-bottom:1rem; filter:drop-shadow(0 0 20px var(--glow)); }
+    .card-price { font-size:2.2rem; color:var(--gold); font-weight:900; margin:1.5rem 0; }
 
     .card-btn {
-      background:rgba(255,215,0,.15); border:1px solid rgba(255,215,0,.3);
-      color:var(--gold); padding:.9rem 2rem; border-radius:10px; cursor:pointer;
-      transition:.3s; font-weight:600;
+      background:rgba(255,215,0,.2); border:1px solid rgba(255,215,0,.4);
+      color:var(--gold); padding:1rem 2.2rem; border-radius:12px;
+      font-weight:700; cursor:pointer; transition:.4s;
+      box-shadow:0 5px 15px rgba(0,0,0,.3);
     }
-    .card-btn:hover { background:var(--gold); color:#000; }
-    .card-btn.added { background:#22c55e; border-color:#22c55e; color:#fff; }
+    .card-btn:hover {
+      background:var(--gold); color:#000;
+      box-shadow:0 0 30px var(--glow-strong);
+    }
+    .card-btn.added {
+      background:#22c55e; border-color:#22c55e; color:#fff;
+    }
 
     /* Toast */
     .toast {
-      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(100px);
-      background:#1a1a1a; border:1px solid rgba(255,215,0,.3); padding:1rem 1.5rem;
-      border-radius:14px; display:flex; align-items:center; gap:1rem; z-index:300;
-      transition:.4s; box-shadow:0 10px 40px rgba(0,0,0,.6);
+      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120px);
+      background:#111; border:1px solid rgba(255,215,0,.4);
+      padding:1.2rem 2rem; border-radius:16px; gap:1rem;
+      display:flex; align-items:center; z-index:999;
+      box-shadow:0 15px 40px rgba(0,0,0,.7), 0 0 30px var(--glow);
+      transition:.5s;
     }
     .toast.show { transform:translateX(-50%) translateY(0); }
 
-    /* Responsive */
-    @media (max-width: 768px) {
+    /* Footer */
+    footer {
+      padding:5rem 5%; text-align:center; background:#0a0a0a;
+      border-top:1px solid rgba(255,215,0,.15);
+    }
+    .footer-logo { font-size:5rem; margin-bottom:1rem; filter:drop-shadow(0 0 30px var(--glow)); }
+    .copyright { color:#555; margin-top:2rem; }
+
+    @media (max-width:768px) {
       .nav-links { display:none; }
-      .hero h1 { font-size:3.5rem; }
+      nav { padding:1rem 4%; }
+      .hero h1 { font-size:4.5rem; }
       .cart-sidebar { width:100%; }
     }
   </style>
@@ -208,55 +283,44 @@
 
   <!-- Loader -->
   <div class="loader" id="loader">
-    <div class="loader-bee">🐝</div>
+    <div class="loader-bee">Bee</div>
     <div class="loader-text">SUPREME SWARM</div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
   </div>
 
-  <!-- Floating Particles -->
-  <div class="particles" id="particles"></div>
-
-  <!-- Cart Overlay & Sidebar -->
+  <!-- Cart -->
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-  <aside class="cart-sidebar" id="cartSidebar" aria-label="Shopping cart">
+  <aside class="cart-sidebar" id="cartSidebar">
     <div class="cart-header">
-      <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
-      <button class="cart-close" onclick="toggleCart()" aria-label="Close cart">✕</button>
+      <h2>Cart</h2>
+      <button class="cart-close" onclick="toggleCart()" aria-label="Close">×</button>
     </div>
     <div class="cart-items" id="cartItems">
-      <div class="cart-empty">
-        <i class="fas fa-shopping-basket"></i>
-        <p>Your cart is empty</p>
-      </div>
+      <div class="cart-empty">Empty</div>
     </div>
-    <div class="cart-footer">
-      <div class="cart-total">
+    <div style="padding:1.5rem; border-top:1px solid rgba(255,215,0,.2);">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:1.2rem;">
         <span>Total:</span>
-        <strong id="cartTotal">$0.00</strong>
+        <strong id="cartTotal" style="color:var(--gold);">$0.00</strong>
       </div>
-      <button class="checkout-btn" id="checkoutBtn" disabled>
-        <i class="fas fa-lock"></i> Secure Checkout
-      </button>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Secure Checkout</button>
     </div>
   </aside>
 
   <!-- Toast -->
   <div class="toast" id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMsg">Added to cart!</span>
+    <span id="toastMsg">Added!</span>
   </div>
 
-  <!-- Navigation -->
+  <!-- Nav -->
   <nav>
-    <div class="logo"><span>🐝</span> SUPREME SWARM</div>
+    <div class="logo"><span>Bee</span> SUPREME SWARM</div>
     <ul class="nav-links">
       <li><a href="#products">Products</a></li>
-      <li><a href="#stores">Where to Buy</a></li>
       <li><a href="#features">Why Us</a></li>
     </ul>
     <div class="nav-right">
-      <button class="cart-btn" onclick="toggleCart()" aria-label="Open cart">
-        <i class="fas fa-shopping-cart"></i>
+      <button class="cart-btn" onclick="toggleCart()">
         <span class="cart-count hidden" id="cartCount">0</span>
       </button>
       <a href="#products" class="shop-btn">Shop Now</a>
@@ -266,12 +330,11 @@
   <!-- Hero -->
   <section class="hero">
     <div>
-      <div class="loader-bee" style="font-size:8rem;margin-bottom:1rem;">🐝</div>
+      <div style="font-size:9rem; filter:drop-shadow(0 0 40px var(--glow-strong));">Bee</div>
       <h1>SUPREME SWARM</h1>
-      <p>Premium Bee Swarm Simulator Items & Accounts – Instant Delivery</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:2rem;">
-        <a href="#products" class="btn-primary"><i class="fas fa-store"></i> Browse Collection</a>
-        <a href="#features" class="btn-secondary"><i class="fas fa-trophy"></i> Why Choose Us</a>
+      <p>Instant Premium Items & Accounts for Bee Swarm Simulator</p>
+      <div style="margin-top:2.5rem; display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+        <a href="#products" class="btn-primary">Browse Collection</a>
       </div>
     </div>
   </section>
@@ -279,214 +342,148 @@
   <!-- Products -->
   <section class="section" id="products">
     <h2 class="section-title">Featured Items</h2>
-    <p style="color:var(--muted);max-width:700px;margin:0 auto 3rem;">Hand-picked top-tier items with instant delivery</p>
+    <p style="color:#888; max-width:700px; margin:0 auto 3rem;">Instant delivery · 100% safe · Lowest prices</p>
     <div class="gold-line"></div>
     <div class="products">
       <div class="card">
-        <span class="card-icon">🐝</span>
+        <span class="card-icon">Bee</span>
         <h3>Mythic Bee Pack</h3>
-        <p>5 Mythic Bees of your choice</p>
+        <p>5 Mythic Bees (Your Choice)</p>
         <div class="card-price">$24.99</div>
-        <button class="card-btn" data-id="mythic" data-name="Mythic Bee Pack" data-price="24.99" data-icon="🐝">
-          <i class="fas fa-cart-plus"></i> Add to Cart
-        </button>
+        <button class="card-btn" data-id="mythic" data-name="Mythic Bee Pack" data-price="24.99" data-icon="Bee">Add to Cart</button>
       </div>
       <div class="card">
-        <span class="card-icon">🍯</span>
-        <h3>Honey Bundle</h3>
+        <span class="card-icon">Honey</span>
+        <h3>100T Honey</h3>
         <p>100 Trillion Honey – Instant</p>
         <div class="card-price">$14.99</div>
-        <button class="card-btn" data-id="honey" data-name="Honey Bundle" data-price="14.99" data-icon="🍯">
-          <i class="fas fa-cart-plus"></i> Add to Cart
-        </button>
+        <button class="card-btn" data-id="honey" data-name="100T Honey" data-price="14.99" data-icon="Honey">Add to Cart</button>
       </div>
       <div class="card">
-        <span class="card-icon">⭐</span>
+        <span class="card-icon">Star</span>
         <h3>Gifted Bee Bundle</h3>
         <p>10 Gifted Bees + Star Treats</p>
         <div class="card-price">$19.99</div>
-        <button class="card-btn" data-id="gifted" data-name="Gifted Bee Bundle" data-price="19.99" data-icon="⭐">
-          <i class="fas fa-cart-plus"></i> Add to Cart
-        </button>
+        <button class="card-btn" data-id="gifted" data-name="Gifted Bee Bundle" data-price="19.99" data-icon="Star">Add to Cart</button>
       </div>
       <div class="card">
-        <span class="card-icon">👑</span>
-        <h3>Stacked Endgame Account</h3>
-        <p>All items, max bees, SSA ready</p>
+        <span class="card-icon">Crown</span>
+        <h3>Stacked Account</h3>
+        <p>Endgame · All Items · SSA Ready</p>
         <div class="card-price">$149.99</div>
-        <button class="card-btn" data-id="account" data-name="Stacked Account" data-price="149.99" data-icon="👑">
-          <i class="fas fa-cart-plus"></i> Add to Cart
-        </button>
+        <button class="card-btn" data-id="account" data-name="Stacked Account" data-price="149.99" data-icon="Crown">Add to Cart</button>
       </div>
-    </div>
-  </section>
-
-  <!-- Where to Buy -->
-  <section class="section" id="stores" style="background:rgba(255,215,0,.02);">
-    <h2 class="section-title">Where to Buy</h2>
-    <p style="color:var(--muted);margin-bottom:3rem;">Choose your preferred platform</p>
-    <div class="gold-line"></div>
-    <div style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; max-width:1000px; margin:0 auto;">
-      <a href="https://discord.gg/yourserver" target="_blank" class="store" style="background:#141414;padding:3rem;border-radius:20px;text-decoration:none;width:280px;">
-        <i class="fab fa-discord" style="font-size:3rem;color:#5865F2;"></i>
-        <h3 style="margin:1rem 0;color:#fff;">Discord Server</h3>
-        <p style="color:#888;">Fastest support & delivery</p>
-      </a>
-      <a href="https://roblox.com" target="_blank" class="store" style="background:#141414;padding:3rem;border-radius:20px;text-decoration:none;width:280px;">
-        <i class="fas fa-gamepad" style="font-size:3rem;color:var(--gold);"></i>
-        <h3 style="margin:1rem 0;color:#fff;">In-Game Trade</h3>
-        <p style="color:#888;">Direct Roblox delivery</p>
-      </a>
-      <a href="#products" class="store" style="background:#141414;padding:3rem;border-radius:20px;text-decoration:none;width:280px;">
-        <i class="fas fa-credit-card" style="font-size:3rem;color:var(--gold);"></i>
-        <h3 style="margin:1rem 0;color:#fff;">Buy Here</h3>
-        <p style="color:#888;">Instant automated checkout</p>
-      </a>
     </div>
   </section>
 
   <!-- Features -->
   <section class="section" id="features">
-    <h2 class="section-title">Why Supreme Swarm?</h2>
-    <p style="color:var(--muted);max-width:700px;margin:0 auto 3rem;">Trusted by over 50,000+ players worldwide</p>
+    <h2 class="section-title">Why Choose Us?</h2>
     <div class="gold-line"></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:1000px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem;max-width:1100px;margin:3rem auto;">
       <div style="text-align:center;">
-        <div style="width:80px;height:80px;background:rgba(255,215,0,.15);border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;font-size:2rem;color:var(--gold);">
-          <i class="fas fa-bolt"></i>
+        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
+          Bolt
         </div>
-        <h3>Instant Delivery</h3>
-        <p style="color:#888;">Get items in under 5 minutes</p>
+        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">Instant Delivery</h3>
+        <p style="color:#999;">Under 5 minutes guaranteed</p>
       </div>
       <div style="text-align:center;">
-        <div style="width:80px;height:80px;background:rgba(255,215,0,.15);border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;font-size:2rem;color:var(--gold);">
-          <i class="fas fa-shield-alt"></i>
+        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
+          Shield
         </div>
-        <h3>100% Safe</h3>
-        <p style="color:#888;">No bans, secure methods only</p>
+        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">100% Safe</h3>
+        <p style="color:#999;">No bans · Secure methods</p>
       </div>
       <div style="text-align:center;">
-        <div style="width:80px;height:80px;background:rgba(255,215,0,.15);border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;font-size:2rem;color:var(--gold);">
-          <i class="fas fa-headset"></i>
+        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
+          Headset
         </div>
-        <h3>24/7 Support</h3>
-        <p style="color:#888;">Live help anytime</p>
+        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">24/7 Support</h3>
+        <p style="color:#999;">Always here to help</p>
       </div>
       <div style="text-align:center;">
-        <div style="width:80px;height:80px;background:rgba(255,215,0,.15);border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;font-size:2rem;color:var(--gold);">
-          <i class="fas fa-dollar-sign"></i>
+        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
+          Dollar
         </div>
-        <h3>Best Prices</h3>
-        <p style="color:#888;">Lowest rates guaranteed</p>
+        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">Best Prices</h3>
+        <p style="color:#999;">Lowest rates on the market</p>
       </div>
     </div>
   </section>
 
-  <footer style="padding:4rem 5%;text-align:center;background:#111;">
-    <div style="font-size:4rem;margin-bottom:1rem;">🐝</div>
-    <div style="display:flex;gap:1rem;justify-content:center;margin:2rem 0;">
-      <a href="#" style="width:50px;height:50px;background:rgba(255,215,0,.1);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:1.5rem;">
-        <i class="fab fa-discord"></i>
-      </a>
-      <a href="#" style="width:50px;height:50px;background:rgba(255,215,0,.1);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:1.5rem;">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </div>
-    <p style="color:#555;">© 2025 Supreme Swarm. All rights reserved.</p>
+  <footer>
+    <div class="footer-logo">Bee</div>
+    <p class="copyright">© 2025 Supreme Swarm. All rights reserved.</p>
   </footer>
 
   <script>
     // Hide loader
-    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2400);
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2300);
 
-    // Generate floating particles
-    const particlesContainer = document.getElementById('particles');
-    for(let i = 0; i < 15; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.width = p.style.height = Math.random() * 6 + 3 + 'px';
-      p.style.animationDuration = Math.random() * 20 + 10 + 's';
-      p.style.animationDelay = Math.random() * 5 + 's';
-      particlesContainer.appendChild(p);
-    }
-
-    // Cart logic
-    let cart = JSON.parse(localStorage.getItem('supremeCart') || '[]');
+    // Cart system with persistence
+    let cart = JSON.parse(localStorage.getItem('ssCart') || '[]');
 
     function saveCart() {
-      localStorage.setItem('supremeCart', JSON.stringify(cart));
-      updateCartUI();
+      localStorage.setItem('ssCart', JSON.stringify(cart));
+      updateCart();
     }
 
-    function updateCartUI() {
+    function updateCart() {
       const itemsEl = document.getElementById('cartItems');
       const totalEl = document.getElementById('cartTotal');
       const countEl = document.getElementById('cartCount');
-      const checkoutBtn = document.getElementById('checkoutBtn');
+      const btn = document.getElementById('checkoutBtn');
 
-      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-      const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
+      const total = cart.reduce((s,i) => s + i.price * i.qty, 0).toFixed(2);
+      const qtyTotal = cart.reduce((s,i) => s + i.qty, 0);
 
-      countEl.textContent = totalItems;
-      countEl.classList.toggle('hidden', totalItems === 0);
-      totalEl.textContent = '$' + totalPrice;
-      checkoutBtn.disabled = cart.length === 0;
+      countEl.textContent = qtyTotal;
+      countEl.classList.toggle('hidden', qtyTotal === 0);
+      totalEl.textContent = '$' + total;
+      btn.disabled = cart.length === 0;
 
       if (cart.length === 0) {
-        itemsEl.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Your cart is empty</p></div>`;
+        itemsEl.innerHTML = `<div class="cart-empty">Empty</div>`;
       } else {
-        itemsEl.innerHTML = cart.map(item => `
+        itemsEl.innerHTML = cart.map(i => `
           <div class="cart-item">
-            <span class="cart-item-icon">${item.icon}</span>
-            <div class="cart-item-info">
-              <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+            <span style="font-size:2.8rem;">${i.icon}</span>
+            <div style="flex:1;">
+              <div style="font-weight:600;">${i.name}</div>
+              <div style="color:var(--gold);font-weight:700;">$${i.price.toFixed(2)} each</div>
             </div>
-            <div style="display:flex;align-items:center;gap:.5rem;">
-              <button class="qty-btn" onclick="changeQty('${item.id}', -1)">–</button>
-              <span style="min-width:30px;text-align:center;font-weight:700;">${item.qty}</span>
-              <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+            <div style="display:flex;gap:.5rem;align-items:center;">
+              <button class="qty-btn" onclick="change('${i.id}',-1)">–</button>
+              <span style="min-width:30px;text-align:center;font-weight:700;">${i.qty}</span>
+              <button class="qty-btn" onclick="change('${i.id}',1)">+</button>
             </div>
-            <button style="background:none;border:none;color:#ff4444;cursor:pointer;font-size:1.2rem;" onclick="removeFromCart('${item.id}')">
-              <i class="fas fa-trash"></i>
-            </button>
+            <button style="background:none;border:none;color:#ff4444;font-size:1.3rem;cursor:pointer;" onclick="remove('${i.id}')">×</button>
           </div>
         `).join('');
       }
     }
 
-    function addToCart(btn) {
-      const { id, name, price, icon } = btn.dataset;
-      const existing = cart.find(i => i.id === id);
-      if (existing) existing.qty++;
-      else cart.push({ id, name, price: parseFloat(price), icon, qty: 1 });
-
+    function add(btn) {
+      const {id, name, price, icon} = btn.dataset;
+      const item = cart.find(x => x.id === id);
+      if (item) item.qty++;
+      else cart.push({id, name, price:parseFloat(price), icon, qty:1});
       btn.classList.add('added');
-      btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+      btn.innerHTML = 'Added!';
       setTimeout(() => {
         btn.classList.remove('added');
-        btn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
-      }, 1500);
-
+        btn.innerHTML = 'Add to Cart';
+      }, 1600);
       saveCart();
-      showToast(`${name} added!`);
+      toast(name + ' added!');
     }
 
-    function changeQty(id, delta) {
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.qty += delta;
-        if (item.qty <= 0) removeFromCart(id);
-        else saveCart();
-      }
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(i => i.id !== id);
-      saveCart();
-      showToast('Item removed');
-    }
+    window.change = (id, d) => {
+      const item = cart.find(x => x.id === id);
+      if (item) { item.qty += d; if (item.qty <= 0) remove(id); else saveCart(); }
+    };
+    window.remove = id => { cart = cart.filter(x => x.id !== id); saveCart(); toast('Removed'); };
 
     function toggleCart() {
       document.getElementById('cartOverlay').classList.toggle('open');
@@ -494,25 +491,23 @@
       document.body.classList.toggle('cart-open');
     }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
+    function toast(msg) {
+      const t = document.getElementById('toast');
       document.getElementById('toastMsg').textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    function checkout() {
-      // Replace with your actual Stripe/PayPal link
-      window.location.href = 'https://buy.stripe.com/your-link-here';
-    }
+    // Add to cart buttons
+    document.querySelectorAll('.card-btn').forEach(b => b.onclick = () => add(b));
 
-    // Event delegation for Add to Cart buttons
-    document.querySelectorAll('.card-btn').forEach(btn => {
-      btn.addEventListener('click', () => addToCart(btn));
-    });
+    // Checkout (replace with your real link)
+    document.getElementById('checkoutBtn').onclick = () => {
+      window.open('https://your-payment-link-here.com', '_blank');
+    };
 
-    // Initial render
-    updateCartUI();
+    // Init
+    updateCart();
   </script>
 </body>
 </html>
