@@ -28,254 +28,262 @@
     }
     body.cart-open { overflow:hidden; }
 
-    /* Loader – Faster & Glowier */
+    /* Custom S-Bee Logo */
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      filter: drop-shadow(0 0 20px var(--glow-strong));
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+    @keyframes logoFloat {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    /* Loader */
     .loader {
       position:fixed; inset:0; background:var(--dark);
       display:grid; place-items:center; gap:1.5rem;
       z-index:9999; transition:opacity .7s, visibility .7s;
     }
     .loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-    .loader-bee { font-size:6rem; filter:drop-shadow(0 0 30px var(--glow-strong)); animation:beeFloat 2s infinite; }
+    .loader .logo-img { width: 100px; height: 100px; }
     .loader-text {
-      color:var(--gold); font-size:2.2rem; font-weight:900; letter-spacing:6px;
-      text-shadow:0 0 20px var(--glow-strong), 0 0 40px var(--glow);
-      animation:pulseGlow 1.5s infinite;
+      color:var(--gold); font-size:2.4rem; font-weight:900; letter-spacing:8px;
+      text-shadow:0 0 30px var(--glow-strong), 0 0 60px var(--glow);
+      animation:pulseGlow 1.8s infinite;
     }
-    .loader-bar { width:260px; height:6px; background:#222; border-radius:6px; overflow:hidden; }
+    @keyframes pulseGlow { 0%,100%{opacity:.6} 50%{opacity:1} }
+    .loader-bar { width:280px; height:7px; background:#222; border-radius:8px; overflow:hidden; }
     .loader-fill { height:100%; width:0; background:linear-gradient(90deg,var(--gold),var(--orange)); 
-                   box-shadow:0 0 20px var(--glow-strong); animation:load 2s forwards; }
-
-    @keyframes beeFloat { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-30px) rotate(4deg)} }
-    @keyframes pulseGlow { 0%,100%{opacity:.7} 50%{opacity:1} }
+                   box-shadow:0 0 25px var(--glow-strong); animation:load 2.2s forwards; }
     @keyframes load { to{width:100%} }
 
-    /* Transparent + Heavy Blur Navbar */
+    /* Transparent Blur Navbar */
     nav {
       position:fixed; top:0; left:0; right:0; padding:1rem 5%;
       display:flex; justify-content:space-between; align-items:center;
       background:transparent;
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(255,215,0,.15);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,215,0,.18);
       z-index:1000;
-      box-shadow:0 8px 32px rgba(0,0,0,.4);
-      animation:slideDown .7s 2.3s forwards;
+      box-shadow:0 10px 40px rgba(0,0,0,.5);
       transform:translateY(-120%);
+      animation:slideDown .8s 2.2s forwards;
     }
     @keyframes slideDown { to{transform:translateY(0)} }
 
     .logo {
-      font-size:1.5rem; font-weight:900; color:var(--gold);
-      display:flex; align-items:center; gap:.6rem;
-      text-shadow:0 0 15px var(--glow);
+      display:flex; align-items:center; gap:12px; font-size:1.6rem; font-weight:900; color:var(--gold);
+      text-shadow:0 0 20px var(--glow);
     }
-    .logo span { font-size:2.4rem; filter:drop-shadow(0 0 20px var(--glow-strong)); }
 
-    .nav-links { display:flex; gap:2.2rem; list-style:none; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
     .nav-links a {
-      color:#ccc; text-decoration:none; font-weight:600; position:relative;
-      transition:.3s; text-shadow:0 0 5px rgba(255,215,0,.2);
+      color:#ddd; text-decoration:none; font-weight:600; position:relative;
+      transition:.4s; text-shadow:0 0 8px rgba(255,215,0,.3);
     }
     .nav-links a::after {
-      content:''; position:absolute; bottom:-8px; left:0; width:0; height:2px;
-      background:var(--gold); box-shadow:0 0 10px var(--glow); transition:.4s;
+      content:''; position:absolute; bottom:-10px; left:0; width:0; height:3px;
+      background:var(--gold); box-shadow:0 0 15px var(--glow); transition:.4s;
     }
-    .nav-links a:hover { color:var(--gold); text-shadow:0 0 15px var(--glow-strong); }
+    .nav-links a:hover { color:var(--gold); text-shadow:0 0 20px var(--glow-strong); }
     .nav-links a:hover::after { width:100%; }
 
-    .nav-right { display:flex; align-items:center; gap:1.2rem; }
+    .nav-right { display:flex; align-items:center; gap:1.3rem; }
     .cart-btn {
-      position:relative; background:rgba(255,215,0,.12); border:1px solid rgba(255,215,0,.3);
-      color:var(--gold); width:52px; height:52px; border-radius:50%; font-size:1.4rem;
-      cursor:pointer; transition:.4s; backdrop-filter:blur(4px);
-      box-shadow:0 0 20px rgba(255,215,0,.2);
+      position:relative; background:rgba(255,215,0,.15); border:1px solid rgba(255,215,0,.35);
+      color:var(--gold); width:56px; height:56px; border-radius:50%; font-size:1.5rem;
+      cursor:pointer; transition:.4s; backdrop-filter:blur(6px);
+      box-shadow:0 0 25px rgba(255,215,0,.25);
     }
     .cart-btn:hover {
-      background:rgba(255,215,0,.25); transform:scale(1.12) rotate(8deg);
-      box-shadow:0 0 30px var(--glow-strong);
+      background:rgba(255,215,0,.3); transform:scale(1.15) rotate(10deg);
+      box-shadow:0 0 40px var(--glow-strong);
     }
     .cart-count {
-      position:absolute; top:-8px; right:-8px; background:var(--orange);
-      color:#000; font-weight:900; font-size:.8rem; width:24px; height:24px;
+      position:absolute; top:-10px; right:-10px; background:var(--orange);
+      color:#000; font-weight:900; font-size:.85rem; width:26px; height:26px;
       border-radius:50%; display:grid; place-items:center;
-      box-shadow:0 0 15px var(--glow);
+      box-shadow:0 0 20px var(--glow);
     }
 
     .shop-btn {
       background:linear-gradient(135deg,var(--gold),var(--orange));
-      color:#000; padding:.8rem 1.8rem; border:none; border-radius:12px;
+      color:#000; padding:.9rem 2rem; border:none; border-radius:14px;
       font-weight:800; text-decoration:none; transition:.4s;
-      box-shadow:0 8px 25px rgba(255,215,0,.4);
+      box-shadow:0 10px 30px rgba(255,215,0,.5);
     }
     .shop-btn:hover {
-      transform:translateY(-4px); box-shadow:0 15px 40px rgba(255,215,0,.6);
+      transform:translateY(-5px); box-shadow:0 20px 50px rgba(255,215,0,.7);
     }
 
-    /* Cart Sidebar – Glowing */
+    /* Cart Sidebar */
     .cart-overlay {
-      position:fixed; inset:0; background:rgba(0,0,0,.85); backdrop-filter:blur(10px);
+      position:fixed; inset:0; background:rgba(0,0,0,.9); backdrop-filter:blur(12px);
       opacity:0; visibility:hidden; transition:.5s; z-index:200;
     }
     .cart-overlay.open { opacity:1; visibility:visible; }
 
     .cart-sidebar {
-      position:fixed; top:0; right:-440px; width:440px; max-width:95%; height:100%;
-      background:linear-gradient(180deg,#0f0f0f,#080808);
-      border-left:2px solid rgba(255,215,0,.3);
-      box-shadow:-20px 0 60px rgba(0,0,0,.7), 0 0 40px var(--glow);
+      position:fixed; top:0; right:-460px; width:460px; max-width:96%; height:100%;
+      background:linear-gradient(180deg,#0c0c0c,#070707);
+      border-left:3px solid rgba(255,215,0,.4);
+      box-shadow:-25px 0 80px rgba(0,0,0,.8), 0 0 50px var(--glow);
       z-index:201; transition:right .5s cubic-bezier(.2,.8,.4,1);
       display:flex; flex-direction:column;
     }
     .cart-sidebar.open { right:0; }
 
     .cart-header {
-      padding:1.8rem; border-bottom:1px solid rgba(255,215,0,.2);
+      padding:2rem; border-bottom:1px solid rgba(255,215,0,.25);
       display:flex; justify-content:space-between; align-items:center;
-      background:rgba(255,215,0,.03);
+      background:rgba(255,215,0,.04);
     }
-    .cart-header h2 { color:var(--gold); font-size:1.4rem; display:flex; gap:.6rem; align-items:center; }
+    .cart-header h2 { color:var(--gold); font-size:1.5rem; display:flex; gap:.7rem; align-items:center; }
 
     .cart-close {
-      background:transparent; border:none; color:#aaa; font-size:1.8rem;
+      background:transparent; border:none; color:#ccc; font-size:2rem;
       cursor:pointer; transition:.3s;
     }
     .cart-close:hover { color:#ff4444; transform:rotate(90deg); }
 
-    .cart-items { flex:1; overflow-y:auto; padding:1.5rem; }
-    .cart-empty { text-align:center; padding:4rem 1rem; color:#666; }
-    .cart-empty i { font-size:4.5rem; color:#333; margin-bottom:1rem; }
+    .cart-items { flex:1; overflow-y:auto; padding:1.8rem; }
+    .cart-empty { text-align:center; padding:5rem 1rem; color:#666; }
+    .cart-empty img { width:80px; opacity:.3; margin-bottom:1rem; }
 
     .cart-item {
-      background:rgba(255,215,0,.06); border:1px solid rgba(255,215,0,.25);
-      border-radius:18px; padding:1.2rem; margin-bottom:1rem;
-      display:flex; align-items:center; gap:1.2rem;
-      box-shadow:0 5px 20px rgba(0,0,0,.3);
-      transition:.3s;
-    }
-    .cart-item:hover { border-color:var(--gold); box-shadow:0 0 25px var(--glow); }
-
-    .qty-btn {
-      background:rgba(255,215,0,.15); border:1px solid rgba(255,215,0,.4);
-      color:var(--gold); width:40px; height:40px; border-radius:10px;
-      cursor:pointer; font-weight:bold; transition:.3s;
-    }
-    .qty-btn:hover { background:var(--gold); color:#000; transform:scale(1.1); }
-
-    .checkout-btn {
-      margin:1.5rem; padding:1.3rem; background:linear-gradient(135deg,var(--gold),var(--orange));
-      color:#000; border:none; border-radius:14px; font-size:1.1rem; font-weight:800;
-      cursor:pointer; box-shadow:0 10px 30px rgba(255,215,0,.5);
+      background:rgba(255,215,0,.08); border:1px solid rgba(255,215,0,.3);
+      border-radius:20px; padding:1.4rem; margin-bottom:1.2rem;
+      display:flex; align-items:center; gap:1.4rem;
+      box-shadow:0 8px 25px rgba(0,0,0,.4);
       transition:.4s;
     }
-    .checkout-btn:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(255,215,0,.7); }
-    .checkout-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+    .cart-item:hover { border-color:var(--gold); box-shadow:0 0 30px var(--glow); }
 
-    /* Hero – Maximum Glow */
+    .qty-btn {
+      background:rgba(255,215,0,.2); border:1px solid rgba(255,215,0,.5);
+      color:var(--gold); width:44px; height:44px; border-radius:12px;
+      cursor:pointer; font-weight:bold; font-size:1.1rem; transition:.3s;
+    }
+    .qty-btn:hover { background:var(--gold); color:#000; transform:scale(1.12); }
+
+    .checkout-btn {
+      margin:2rem; padding:1.4rem; background:linear-gradient(135deg,var(--gold),var(--orange));
+      color:#000; border:none; border-radius:16px; font-size:1.2rem; font-weight:800;
+      cursor:pointer; box-shadow:0 12px 40px rgba(255,215,0,.6);
+      transition:.4s;
+    }
+    .checkout-btn:hover:not(:disabled) {
+      transform:translateY(-6px); box-shadow:0 25px 60px rgba(255,215,0,.8);
+    }
+    .checkout-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* Hero – Epic Glow */
     .hero {
       min-height:100vh; display:grid; place-items:center; text-align:center;
-      padding:2rem; position:relative;
-      background:radial-gradient(circle at center, rgba(255,215,0,.1) 0%, transparent 70%);
+      padding:3rem; position:relative; overflow:hidden;
     }
     .hero::before {
       content:''; position:absolute; inset:0;
-      background:radial-gradient(circle at 50% 30%, rgba(255,215,0,.25), transparent 60%);
-      animation:glowPulse  8s infinite alternate;
+      background:radial-gradient(circle at 50% 35%, rgba(255,215,0,.3), transparent 65%);
+      animation:glowPulse 10s infinite alternate;
       pointer-events:none;
     }
-    @keyframes glowBg { 0%{opacity:.3} 100%{opacity:.6} }
+    @keyframes glowPulse { 0%{opacity:.4} 100%{opacity:.7} }
 
     .hero h1 {
-      font-size:clamp(3.5rem,9vw,7rem); font-weight:900; margin:1.5rem 0;
+      font-size:clamp(4rem,10vw,8rem); font-weight:900; margin:2rem 0;
       background:linear-gradient(135deg,#FFD700,#FFC107,#FF8F00,#FFD700);
       -webkit-background-clip:text; background-clip:text;
       -webkit-text-fill-color:transparent;
-      text-shadow:0 0 40px var(--glow-strong), 0 0 80px var(--glow);
-      animation:shimmer 4s infinite;
+      text-shadow:0 0 50px var(--glow-strong), 0 0 100px var(--glow);
+      animation:shimmer 5s infinite;
     }
-    @keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.4)} }
+    @keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.5)} }
 
-    .hero p { font-size:1.3rem; color:#aaa; margin-bottom:2rem; }
+    .hero p { font-size:1.4rem; color:#bbb; margin-bottom:3rem; max-width:700px; }
 
     .btn-primary {
       background:linear-gradient(135deg,var(--gold),var(--orange));
-      color:#000; padding:1.1rem 2.5rem; border-radius:14px;
-      font-weight:800; text-decoration:none; display:inline-flex; gap:.6rem;
-      align-items:center; box-shadow:0 10px 30px rgba(255,215,0,.5);
-      transition:.4s;
+      color:#000; padding:1.3rem 3rem; border-radius:16px;
+      font-weight:800; font-size:1.1rem; text-decoration:none;
+      display:inline-flex; gap:.8rem; align-items:center;
+      box-shadow:0 15px 40px rgba(255,215,0,.6);
+      transition:.5s;
     }
     .btn-primary:hover {
-      transform:translateY(-6px) scale(1.05);
-      box-shadow:0 20px 50px rgba(255,215,0,.7);
+      transform:translateY(-8px) scale(1.06);
+      box-shadow:0 30px 70px rgba(255,215,0,.8);
     }
 
     /* Sections */
-    .section { padding:7rem 5%; text-align:center; }
+    .section { padding:8rem 5%; text-align:center; }
     .section-title {
-      font-size:3rem; color:var(--gold); margin-bottom:.8rem;
-      text-shadow:0 0 20px var(--glow);
+      font-size:3.4rem; color:var(--gold); margin-bottom:1rem;
+      text-shadow:0 0 30px var(--glow);
     }
     .gold-line {
-      width:100px; height:5px; background:linear-gradient(90deg,var(--gold),var(--orange));
-      margin:2rem auto; border-radius:4px;
-      box-shadow:0 0 20px var(--glow-strong);
+      width:120px; height:6px; background:linear-gradient(90deg,var(--gold),var(--orange));
+      margin:2.5rem auto; border-radius:6px;
+      box-shadow:0 0 30px var(--glow-strong);
     }
 
     .products {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:2rem; max-width:1400px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:2.5rem; max-width:1500px; margin:0 auto;
     }
     .card {
       background:linear-gradient(145deg,#111,#0a0a0a);
-      border:1px solid rgba(255,215,0,.2); border-radius:24px;
-      padding:2.5rem; text-align:center; transition:.5s;
-      box-shadow:0 10px 30px rgba(0,0,0,.5);
+      border:1px solid rgba(255,215,0,.25); border-radius:28px;
+      padding:3rem; text-align:center; transition:.6s;
+      box-shadow:0 15px 40px rgba(0,0,0,.6);
     }
     .card:hover {
-      transform:translateY(-20px) scale(1.03);
+      transform:translateY(-25px) scale(1.04);
       border-color:var(--gold);
-      box-shadow:0 30px 80px rgba(255,215,0,.3);
+      box-shadow:0 40px 100px rgba(255,215,0,.35);
     }
-    .card-icon { font-size:4rem; margin-bottom:1rem; filter:drop-shadow(0 0 20px var(--glow)); }
-    .card-price { font-size:2.2rem; color:var(--gold); font-weight:900; margin:1.5rem 0; }
+    .card-icon { width:90px; height:90px; margin:0 auto 1.5rem; filter:drop-shadow(0 0 25px var(--glow)); }
+    .card-price { font-size:2.5rem; color:var(--gold); font-weight:900; margin:1.8rem 0; }
 
     .card-btn {
-      background:rgba(255,215,0,.2); border:1px solid rgba(255,215,0,.4);
-      color:var(--gold); padding:1rem 2.2rem; border-radius:12px;
+      background:rgba(255,215,0,.25); border:1px solid rgba(255,215,0,.5);
+      color:var(--gold); padding:1.1rem 2.5rem; border-radius:14px;
       font-weight:700; cursor:pointer; transition:.4s;
-      box-shadow:0 5px 15px rgba(0,0,0,.3);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
     }
     .card-btn:hover {
       background:var(--gold); color:#000;
-      box-shadow:0 0 30px var(--glow-strong);
+      box-shadow:0 0 40px var(--glow-strong);
     }
     .card-btn.added {
       background:#22c55e; border-color:#22c55e; color:#fff;
     }
 
-    /* Toast */
     .toast {
-      position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(120px);
-      background:#111; border:1px solid rgba(255,215,0,.4);
-      padding:1.2rem 2rem; border-radius:16px; gap:1rem;
+      position:fixed; bottom:2.5rem; left:50%; transform:translateX(-50%) translateY(140px);
+      background:#0f0f0f; border:1px solid rgba(255,215,0,.5);
+      padding:1.4rem 2.5rem; border-radius:18px; gap:1.2rem;
       display:flex; align-items:center; z-index:999;
-      box-shadow:0 15px 40px rgba(0,0,0,.7), 0 0 30px var(--glow);
+      box-shadow:0 20px 50px rgba(0,0,0,.8), 0 0 40px var(--glow);
       transition:.5s;
     }
     .toast.show { transform:translateX(-50%) translateY(0); }
 
-    /* Footer */
     footer {
-      padding:5rem 5%; text-align:center; background:#0a0a0a;
-      border-top:1px solid rgba(255,215,0,.15);
+      padding:6rem 5%; text-align:center; background:#080808;
+      border-top:1px solid rgba(255,215,0,.2);
     }
-    .footer-logo { font-size:5rem; margin-bottom:1rem; filter:drop-shadow(0 0 30px var(--glow)); }
-    .copyright { color:#555; margin-top:2rem; }
+    .footer-logo { width:100px; height:100px; margin-bottom:1.5rem; filter:drop-shadow(0 0 40px var(--glow)); }
+    .copyright { color:#666; margin-top:2rem; font-size:1rem; }
 
     @media (max-width:768px) {
       .nav-links { display:none; }
-      nav { padding:1rem 4%; }
-      .hero h1 { font-size:4.5rem; }
+      .hero h1 { font-size:5rem; }
       .cart-sidebar { width:100%; }
+      .products { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -283,231 +291,4 @@
 
   <!-- Loader -->
   <div class="loader" id="loader">
-    <div class="loader-bee">Bee</div>
-    <div class="loader-text">SUPREME SWARM</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
-  </div>
-
-  <!-- Cart -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-  <aside class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h2>Cart</h2>
-      <button class="cart-close" onclick="toggleCart()" aria-label="Close">×</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <div class="cart-empty">Empty</div>
-    </div>
-    <div style="padding:1.5rem; border-top:1px solid rgba(255,215,0,.2);">
-      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:1.2rem;">
-        <span>Total:</span>
-        <strong id="cartTotal" style="color:var(--gold);">$0.00</strong>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn" disabled>Secure Checkout</button>
-    </div>
-  </aside>
-
-  <!-- Toast -->
-  <div class="toast" id="toast">
-    <span id="toastMsg">Added!</span>
-  </div>
-
-  <!-- Nav -->
-  <nav>
-    <div class="logo"><span>Bee</span> SUPREME SWARM</div>
-    <ul class="nav-links">
-      <li><a href="#products">Products</a></li>
-      <li><a href="#features">Why Us</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="cart-btn" onclick="toggleCart()">
-        <span class="cart-count hidden" id="cartCount">0</span>
-      </button>
-      <a href="#products" class="shop-btn">Shop Now</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div>
-      <div style="font-size:9rem; filter:drop-shadow(0 0 40px var(--glow-strong));">Bee</div>
-      <h1>SUPREME SWARM</h1>
-      <p>Instant Premium Items & Accounts for Bee Swarm Simulator</p>
-      <div style="margin-top:2.5rem; display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
-        <a href="#products" class="btn-primary">Browse Collection</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section class="section" id="products">
-    <h2 class="section-title">Featured Items</h2>
-    <p style="color:#888; max-width:700px; margin:0 auto 3rem;">Instant delivery · 100% safe · Lowest prices</p>
-    <div class="gold-line"></div>
-    <div class="products">
-      <div class="card">
-        <span class="card-icon">Bee</span>
-        <h3>Mythic Bee Pack</h3>
-        <p>5 Mythic Bees (Your Choice)</p>
-        <div class="card-price">$24.99</div>
-        <button class="card-btn" data-id="mythic" data-name="Mythic Bee Pack" data-price="24.99" data-icon="Bee">Add to Cart</button>
-      </div>
-      <div class="card">
-        <span class="card-icon">Honey</span>
-        <h3>100T Honey</h3>
-        <p>100 Trillion Honey – Instant</p>
-        <div class="card-price">$14.99</div>
-        <button class="card-btn" data-id="honey" data-name="100T Honey" data-price="14.99" data-icon="Honey">Add to Cart</button>
-      </div>
-      <div class="card">
-        <span class="card-icon">Star</span>
-        <h3>Gifted Bee Bundle</h3>
-        <p>10 Gifted Bees + Star Treats</p>
-        <div class="card-price">$19.99</div>
-        <button class="card-btn" data-id="gifted" data-name="Gifted Bee Bundle" data-price="19.99" data-icon="Star">Add to Cart</button>
-      </div>
-      <div class="card">
-        <span class="card-icon">Crown</span>
-        <h3>Stacked Account</h3>
-        <p>Endgame · All Items · SSA Ready</p>
-        <div class="card-price">$149.99</div>
-        <button class="card-btn" data-id="account" data-name="Stacked Account" data-price="149.99" data-icon="Crown">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="section" id="features">
-    <h2 class="section-title">Why Choose Us?</h2>
-    <div class="gold-line"></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem;max-width:1100px;margin:3rem auto;">
-      <div style="text-align:center;">
-        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
-          Bolt
-        </div>
-        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">Instant Delivery</h3>
-        <p style="color:#999;">Under 5 minutes guaranteed</p>
-      </div>
-      <div style="text-align:center;">
-        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
-          Shield
-        </div>
-        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">100% Safe</h3>
-        <p style="color:#999;">No bans · Secure methods</p>
-      </div>
-      <div style="text-align:center;">
-        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
-          Headset
-        </div>
-        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">24/7 Support</h3>
-        <p style="color:#999;">Always here to help</p>
-      </div>
-      <div style="text-align:center;">
-        <div style="width:90px;height:90px;background:rgba(255,215,0,.2);border:2px solid rgba(255,215,0,.4);border-radius:50%;margin:0 auto 1.5rem;display:grid;place-items:center;font-size:2.5rem;color:var(--gold);box-shadow:0 0 30px var(--glow);">
-          Dollar
-        </div>
-        <h3 style="font-size:1.3rem;margin-bottom:.5rem;">Best Prices</h3>
-        <p style="color:#999;">Lowest rates on the market</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-logo">Bee</div>
-    <p class="copyright">© 2025 Supreme Swarm. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Hide loader
-    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2300);
-
-    // Cart system with persistence
-    let cart = JSON.parse(localStorage.getItem('ssCart') || '[]');
-
-    function saveCart() {
-      localStorage.setItem('ssCart', JSON.stringify(cart));
-      updateCart();
-    }
-
-    function updateCart() {
-      const itemsEl = document.getElementById('cartItems');
-      const totalEl = document.getElementById('cartTotal');
-      const countEl = document.getElementById('cartCount');
-      const btn = document.getElementById('checkoutBtn');
-
-      const total = cart.reduce((s,i) => s + i.price * i.qty, 0).toFixed(2);
-      const qtyTotal = cart.reduce((s,i) => s + i.qty, 0);
-
-      countEl.textContent = qtyTotal;
-      countEl.classList.toggle('hidden', qtyTotal === 0);
-      totalEl.textContent = '$' + total;
-      btn.disabled = cart.length === 0;
-
-      if (cart.length === 0) {
-        itemsEl.innerHTML = `<div class="cart-empty">Empty</div>`;
-      } else {
-        itemsEl.innerHTML = cart.map(i => `
-          <div class="cart-item">
-            <span style="font-size:2.8rem;">${i.icon}</span>
-            <div style="flex:1;">
-              <div style="font-weight:600;">${i.name}</div>
-              <div style="color:var(--gold);font-weight:700;">$${i.price.toFixed(2)} each</div>
-            </div>
-            <div style="display:flex;gap:.5rem;align-items:center;">
-              <button class="qty-btn" onclick="change('${i.id}',-1)">–</button>
-              <span style="min-width:30px;text-align:center;font-weight:700;">${i.qty}</span>
-              <button class="qty-btn" onclick="change('${i.id}',1)">+</button>
-            </div>
-            <button style="background:none;border:none;color:#ff4444;font-size:1.3rem;cursor:pointer;" onclick="remove('${i.id}')">×</button>
-          </div>
-        `).join('');
-      }
-    }
-
-    function add(btn) {
-      const {id, name, price, icon} = btn.dataset;
-      const item = cart.find(x => x.id === id);
-      if (item) item.qty++;
-      else cart.push({id, name, price:parseFloat(price), icon, qty:1});
-      btn.classList.add('added');
-      btn.innerHTML = 'Added!';
-      setTimeout(() => {
-        btn.classList.remove('added');
-        btn.innerHTML = 'Add to Cart';
-      }, 1600);
-      saveCart();
-      toast(name + ' added!');
-    }
-
-    window.change = (id, d) => {
-      const item = cart.find(x => x.id === id);
-      if (item) { item.qty += d; if (item.qty <= 0) remove(id); else saveCart(); }
-    };
-    window.remove = id => { cart = cart.filter(x => x.id !== id); saveCart(); toast('Removed'); };
-
-    function toggleCart() {
-      document.getElementById('cartOverlay').classList.toggle('open');
-      document.getElementById('cartSidebar').classList.toggle('open');
-      document.body.classList.toggle('cart-open');
-    }
-
-    function toast(msg) {
-      const t = document.getElementById('toast');
-      document.getElementById('toastMsg').textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    // Add to cart buttons
-    document.querySelectorAll('.card-btn').forEach(b => b.onclick = () => add(b));
-
-    // Checkout (replace with your real link)
-    document.getElementById('checkoutBtn').onclick = () => {
-      window.open('https://your-payment-link-here.com', '_blank');
-    };
-
-    // Init
-    updateCart();
-  </script>
-</body>
-</html>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAIaCAYAAABu6a9RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAgAElEQVR4nOzdd3gU1f7H8e8t2N1tJ9nd2d3Z3d3Z3d0FwQWgIGB3QXAQ8B4EDwIXgYvAReAiUBAoCBQECgIFgYJAgSBAoCBQECgIFAQKAgWBAkGBwEHgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEbgIXAQuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARuAhcBC4CF4GLwEXgInARu
